@@ -66,6 +66,6 @@ jobs:
             echo 'Removing Legacy Docker Containers ❌'
             docker stop $(docker ps -aq)
             docker kill $(docker ps -aq)
-            docker system prune -a
+            docker system prune -af
             echo 'Running Docker Containers 🚀'
-            docker-compose up -d
+            docker-compose up -d --build
