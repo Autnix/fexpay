@@ -57,10 +57,10 @@ jobs:
             rm -rf ~/${{ github.repository }}
             mkdir -p ~/${{ github.repository }}
             cd ~/${{ github.repository }}
-            git clone https://Autnix:${{ secrets.TOKEN }}@github.com/Autnix/${{ github.repository }} app
+            git clone https://Autnix:${{ secrets.TOKEN }}@github.com/Autnix/fexpay app
             cd app
-            yarn
-            yarn build
+            npm install
+            npm run build
             echo 'Creating .env file 😎'
             touch .env
             echo 'Removing Legacy Docker Containers ❌'
