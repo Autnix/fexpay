@@ -9,6 +9,7 @@
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
 }
 
 a {
@@ -18,4 +19,5 @@ a {
 html, body, #__nuxt, #__layout {
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
 }

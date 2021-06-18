@@ -1,0 +1,31 @@
+:root {
+
+  --background-color-primary: #FAFCFE;
+  --background-color-sidebar: #F3F9FE;
+  --background-color-rightbar: #FEFEFE;
+  --primary-color: #74bdf5;
+  --primary-color-rgb: 143, 202, 248;
+  --red-color: #FE4C5F;
+  --text-color: #616161;
+  --light: #FFF;
+  --light-rgb: 255,255,255;
+  --dark: #000;
+  --dark-rgb: 0,0,0;
+
+}
+
+.main.dark {
+
+  --background-color-primary: #181F48;
+  --background-color-sidebar: #274AD2;
+  --text-color: #FFF;
+  --light: #000;
+  --light-rgb: 0,0,0;
+  --dark: #FFF;
+  --dark-rgb: 255,255,255;
+
+}
+
+.main {
+  transition: 200ms background-color;
+}
