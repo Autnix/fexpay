@@ -224,6 +224,9 @@ export default {
           opacity: 0;
           visibility: hidden;
           transition: 200ms all;
+          span {
+            color: #d8dfff;
+          }
         }
       }
     }

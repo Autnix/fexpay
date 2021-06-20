@@ -1,13 +1,20 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600;700;800;900&display=swap');
+
+// Fixes
 @import 'reset';
 @import 'colors';
 @import 'scrollbar';
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600;700;800;900&display=swap');
+
 @import 'layout';
 @import 'defines';
-@import 'lists';
+
+// Components
+@import 'components/lists';
+@import 'components/cards';
 
 body {
   font-family: 'Rubik', sans-serif;
-  color: var(--text-color);
+  background-color: #181F48;
 }

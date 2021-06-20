@@ -3,11 +3,17 @@
     <input type="checkbox" class="form-control" id="bar-id" />
     <div class="main" :class="{ dark: $store.state.dark_mode }">
       <label for="bar-id" class="backdrop"></label>
+      <input type="checkbox" class="form-control" id="user-id" />
       <uiLeftbar />
       <div class="content">
         <div class="page">
           <div class="topbar">
             <div class="left">
+              <div class="user-icon">
+                <label for="user-id">
+                  <uil-user size="25px" />
+                </label>
+              </div>
               <div class="search">
                 <input
                   type="text"
@@ -34,12 +40,13 @@
 </template>
 
 <script>
-import { UilBars, UilSearch } from "@iconscout/vue-unicons";
+import { UilBars, UilSearch, UilUser } from "@iconscout/vue-unicons";
 
 export default {
   components: {
     UilBars,
     UilSearch,
+    UilUser,
   },
   data() {
     return {

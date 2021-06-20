@@ -18,5 +18,8 @@ module.exports = {
   buildModules,
   modules,
   build,
-  serverMiddleware
+  serverMiddleware,
+  server: {
+    host: "0.0.0.0"
+  }
 }

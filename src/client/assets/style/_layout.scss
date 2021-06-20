@@ -1,4 +1,9 @@
+:root {
+  --mobile-max-width: 920px;
+}
+
 .index {
+  
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -14,6 +19,14 @@
           opacity: 1;
           visibility: visible;
         }
+      }
+    } 
+  }
+  #user-id {
+    display: none;
+    &:checked {
+      & ~ .left-bar {
+        transform: translateX(0);
       }
     } 
   }
@@ -96,6 +109,14 @@
                 transition: 200ms opacity;
               }
             }
+            .user-icon {
+              display: none;
+              margin-right: 10px;
+              label {
+                cursor: pointer;
+                color: var(--text-color)
+              }
+            }
           }
         }
       }
@@ -120,4 +141,32 @@
     }
   
   }
+}
+
+@media screen and (max-width: 920px) {
+  
+  .left-bar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-width: 100vw;
+    height: 100%;
+    z-index: 9999;
+    transform: translateX(-100%);
+    transition: var(--animation-speed) transform;
+    .mobile-top {
+      display: flex !important;
+    }
+  }
+
+  .topbar {
+
+    .left {
+      .user-icon {
+        display: block !important;
+      }
+    }
+  }
+
 }

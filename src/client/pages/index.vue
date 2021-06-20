@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="card"></div>
+
+    <div style="margin: 3rem 0"></div>
+
     <h2 class="main-title">Son İşlemler</h2>
     <div class="sub">
       <span class="main-desc">Gelen ve Gidenler</span>
@@ -15,7 +19,7 @@
             alt=""
           />
         </div>
-        <div class="main">
+        <div class="details">
           <div class="name">DataFex Fatura Ödeme</div>
           <div class="desc">Giden Transfer</div>
         </div>
@@ -27,11 +31,11 @@
           <uil-arrow-down size="25px" />
         </div>
       </li>
-      <li>
+      <li v-for="n in 20" :key="n">
         <div class="avatar">
           <img src="https://cdn.datafex.com.tr/fgjC8t.jpg" alt="" />
         </div>
-        <div class="main">
+        <div class="details">
           <div class="name">Atakan Unal</div>
           <div class="desc">Gelen Transfer</div>
         </div>
@@ -46,6 +50,7 @@
     </ul>
   </div>
 </template>
+
 
 <script>
 import {
