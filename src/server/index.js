@@ -1,23 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const fs = require('fs');
+const Route = require('./route');
 
 app.use(express.json());
 
-// fs.readdir("./src/server/routes", (err, files) => {
-
-//   const routes = {};
-
-//   files.forEach(file => {
-
-//     let name = file.split(".")[0]
-//     routes[name] = require("./routes/" + name)
-//     app.use("/" + name, routes[name])
-
-//   })
-
-// })
+Route.use(app);
 
 app.get("/", async (req, res) => {
 
