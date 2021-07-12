@@ -17,6 +17,7 @@ jobs:
           heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
           buildpack: "heroku/nodejs"
         env:
+          NODE_ENV: production
           HOST: ${{secrets.HEROKU_ENV_HOST}}
           BASE_URL: ${{secrets.HEROKU_ENV_BASE_URL}}
           API_PATH: ${{secrets.HEROKU_ENV_API_PATH}}
