@@ -17,6 +17,22 @@
 
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color-primary: #181F48;
+    --background-color-sidebar: #274AD2;
+    --background-color-sidebar-rgb: 39, 74, 210;
+    --card-color: #274AD2;
+    --card-color-rgb: 39, 74, 210;
+    --text-color: #FFF;
+    --light: #000;
+    --light-rgb: 0,0,0;
+    --dark: #FFF;
+    --dark-rgb: 255,255,255;
+  }
+}
+
+
 .main.dark {
 
   --background-color-primary: #181F48;

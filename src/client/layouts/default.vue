@@ -53,15 +53,6 @@ export default {
       dark_mode: false,
     };
   },
-  async mounted() {
-    if (process.browser) {
-      if (
-        window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
-      ) {
-        await this.$store.dispatch("setDarkToTheme", true);
-      }
-    }
-  },
+  async mounted() {},
 };
 </script>
