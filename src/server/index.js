@@ -1,10 +1,10 @@
 require('dotenv').config();
+require('./mongo');
 const express = require('express');
 const app = express();
 const Route = require('./route');
 
 app.use(express.json());
-
 Route.use(app);
 
 app.get("/", async (req, res) => {

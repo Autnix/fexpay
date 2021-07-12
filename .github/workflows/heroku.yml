@@ -22,3 +22,4 @@ jobs:
           BASE_URL: ${{secrets.HEROKU_ENV_BASE_URL}}
           API_PATH: ${{secrets.HEROKU_ENV_API_PATH}}
           API_SSL: ${{secrets.HEROKU_ENV_API_SSL}}
+          MONGO_URI: ${{secrets.HEROKU_ENV_MONGO_URI}}
