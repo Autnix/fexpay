@@ -5,19 +5,19 @@ const fs = require('fs');
 
 app.use(express.json());
 
-fs.readdir("./src/server/routes", (err, files) => {
+// fs.readdir("./src/server/routes", (err, files) => {
 
-  const routes = {};
+//   const routes = {};
 
-  files.forEach(file => {
+//   files.forEach(file => {
 
-    let name = file.split(".")[0]
-    routes[name] = require("./routes/" + name)
-    app.use("/" + name, routes[name])
+//     let name = file.split(".")[0]
+//     routes[name] = require("./routes/" + name)
+//     app.use("/" + name, routes[name])
 
-  })
+//   })
 
-})
+// })
 
 app.get("/", async (req, res) => {
 
