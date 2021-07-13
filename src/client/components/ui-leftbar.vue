@@ -1,12 +1,22 @@
 <template>
   <div class="left-bar">
     <div class="profile-and-menu">
-      <div class="mobile-top">
-        <div class="close-sidebar">
-          <label for="user-id">
-            <uil-times size="30px" />
-          </label>
+      <div class="logo-area">
+        <div class="mobile-top">
+          <div class="close-sidebar">
+            <label for="user-id">
+              <uil-times size="30px" />
+            </label>
+          </div>
         </div>
+        <a class="logo-a">
+          <img
+            src="~/assets/img/logo/fexpay-light-text.svg"
+            width="170px"
+            draggable="false"
+            alt=""
+          />
+        </a>
       </div>
       <ProfileInfoBar />
       <MenuBar />
@@ -40,12 +50,24 @@ export default {
   // padding: 20px;
   .profile-and-menu {
     overflow-y: auto;
+    .logo-area {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      .logo-a {
+        transition: 200ms transform;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
   }
   .mobile-top {
     display: none;
     justify-content: flex-start;
     align-items: center;
-    margin: 15px 10px 0 10px;
+    // margin: 15px 10px 0 10px;
     .close-sidebar {
       label {
         cursor: pointer;

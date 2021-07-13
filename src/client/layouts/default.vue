@@ -24,6 +24,16 @@
                   <uil-search size="20px" />
                 </div>
               </div>
+              <div class="top-logo">
+                <a class="logo-a">
+                  <img
+                    src="~/assets/img/logo/fexpay-light-text.svg"
+                    width="170px"
+                    draggable="false"
+                    alt=""
+                  />
+                </a>
+              </div>
             </div>
             <div class="bar-icon">
               <label for="bar-id">
