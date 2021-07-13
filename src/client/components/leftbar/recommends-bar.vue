@@ -5,7 +5,7 @@
         Daha fazla özellikten yararlanmak için <br />
         hesabını <strong>Premium</strong>'a yükselt
       </p>
-      <button>Upgrade</button>
+      <button>Yükselt</button>
     </div>
   </div>
 </template>

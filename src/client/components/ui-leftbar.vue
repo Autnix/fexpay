@@ -61,7 +61,7 @@ export default {
     .logo-area {
       display: flex;
       justify-content: center;
-      margin-top: 15px;
+      margin-top: 25px;
       .logo-a {
         transition: 200ms transform;
         cursor: pointer;
