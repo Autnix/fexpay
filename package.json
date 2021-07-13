@@ -17,11 +17,14 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "bootstrap": "^5.0.2",
+    "card-validator": "^8.1.1",
     "core-js": "^3.15.2",
+    "crypto-js": "^4.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.13.2",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^0.2.2",
