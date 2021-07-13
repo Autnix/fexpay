@@ -11,7 +11,15 @@
         </div>
         <a class="logo-a">
           <img
+            v-if="$store.state.dark_mode"
             src="~/assets/img/logo/fexpay-light-text.svg"
+            width="170px"
+            draggable="false"
+            alt=""
+          />
+          <img
+            v-else
+            src="~/assets/img/logo/fexpay-dark-text.svg"
             width="170px"
             draggable="false"
             alt=""

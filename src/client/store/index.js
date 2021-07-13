@@ -1,5 +1,5 @@
 export const state = () => ({
-  dark_mode: false,
+  dark_mode: true,
 })
 
 export const mutations = {

@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <input type="checkbox" class="form-control" id="bar-id" />
-    <div class="main" :class="{ dark: $store.state.dark_mode }">
+    <div class="main" :class="{ light: !$store.state.dark_mode }">
       <label for="bar-id" class="backdrop"></label>
       <input type="checkbox" class="form-control" id="user-id" />
       <uiLeftbar />
@@ -27,7 +27,15 @@
               <div class="top-logo">
                 <a class="logo-a">
                   <img
+                    v-if="$store.state.dark_mode"
                     src="~/assets/img/logo/fexpay-light-text.svg"
+                    width="170px"
+                    draggable="false"
+                    alt=""
+                  />
+                  <img
+                    v-else
+                    src="~/assets/img/logo/fexpay-dark-text.svg"
                     width="170px"
                     draggable="false"
                     alt=""
