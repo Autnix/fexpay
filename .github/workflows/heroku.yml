@@ -17,9 +17,9 @@ jobs:
           heroku_email: ${{secrets.HEROKU_USER_EMAIL}}
           buildpack: "heroku/nodejs"
         env:
-          NODE_ENV: production
-          HOST: ${{secrets.HEROKU_ENV_HOST}}
-          BASE_URL: ${{secrets.HEROKU_ENV_BASE_URL}}
-          API_PATH: ${{secrets.HEROKU_ENV_API_PATH}}
-          API_SSL: ${{secrets.HEROKU_ENV_API_SSL}}
-          MONGO_URI: ${{secrets.HEROKU_ENV_MONGO_URI}}
+          HD_NODE_ENV: production
+          HD_HOST: ${{secrets.HEROKU_ENV_HOST}}
+          HD_BASE_URL: ${{secrets.HEROKU_ENV_BASE_URL}}
+          HD_API_PATH: ${{secrets.HEROKU_ENV_API_PATH}}
+          HD_API_SSL: ${{secrets.HEROKU_ENV_API_SSL}}
+          HD_MONGO_URI: ${{secrets.HEROKU_ENV_MONGO_URI}}
