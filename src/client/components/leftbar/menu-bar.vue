@@ -14,6 +14,26 @@
           <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
         </a>
       </li>
+      <li>
+        <a href="#">
+          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
+        </a>
+      </li>
     </ul>
   </div>
 </template>

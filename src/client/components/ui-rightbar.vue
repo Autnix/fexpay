@@ -93,6 +93,23 @@
           <span>Bilal Atakan Ünal</span>
         </div>
       </div>
+
+      <div class="card bank bank-format">
+        <div class="top">
+          <div class="icon">
+            <uil-university size="25px" />
+          </div>
+        </div>
+        <!-- <div class="bankname">
+          <span>DATAFEX HESAP BAKİYESİ</span>
+        </div> -->
+        <div class="iban">
+          <span>DATAFEX HESAP BAKİYESİ</span>
+        </div>
+        <div class="name">
+          <span>Bilal Atakan Ünal</span>
+        </div>
+      </div>
     </div>
     <div class="add-more">
       <a href="#">

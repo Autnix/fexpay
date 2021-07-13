@@ -29,14 +29,14 @@
                   <img
                     v-if="$store.state.dark_mode"
                     src="~/assets/img/logo/fexpay-light-text.svg"
-                    width="170px"
+                    height="25px"
                     draggable="false"
                     alt=""
                   />
                   <img
                     v-else
                     src="~/assets/img/logo/fexpay-dark-text.svg"
-                    width="170px"
+                    height="25px"
                     draggable="false"
                     alt=""
                   />
