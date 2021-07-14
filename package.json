@@ -18,10 +18,13 @@
     "@nuxtjs/pwa": "^3.3.5",
     "bootstrap": "^5.0.2",
     "card-validator": "^8.1.1",
+    "connect-redis": "^6.0.0",
     "core-js": "^3.15.2",
     "crypto-js": "^4.0.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "ioredis": "^4.27.6",
     "mongoose": "^5.13.2",
     "nuxt": "^2.15.7",
     "uuid": "^8.3.2"
