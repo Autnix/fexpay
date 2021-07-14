@@ -1,0 +1,80 @@
+:root {
+  --b-color-primary: #5660F2;
+  --b-color-danger: #dc3545;
+  --b-color-warning: #ffc107;
+  --b-color-secondary: #343a40;
+}
+
+.button {
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  border: 0;
+  border-radius: 5px;
+  margin: 10px 0;
+  
+  background-color: #5660F2;
+  color: white;
+  position: relative;
+
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgba(255,255,255,.1);
+    transition: 200ms all;
+  }
+
+  &:disabled {
+    cursor: auto !important;
+    &::after {
+      background-color: rgba(0,0,0,.2) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+  
+
+}
+
+.b-bold {
+  font-weight: 600 !important;
+}
+
+.b-block {
+  display: block;
+  width: 100%;
+}
+
+.b-primary {
+  background-color: var(--b-color-primary) !important;
+  color: white !important;
+}
+
+.b-danger {
+  background-color: var(--b-color-danger) !important;
+  color: white !important;
+}
+
+.b-warning {
+  background-color: var(--b-color-warning) !important;
+  color: black !important;
+}
+
+.b-secondary {
+  background-color: var(--b-color-secondary) !important;
+  color: white !important;
+}
+

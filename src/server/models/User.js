@@ -17,6 +17,7 @@ module.exports = models.users || model('users', new Schema({
   accountType: { type: Number, default: 0 },
   betaUser: { type: Number, default: 0 },
   validate: { type: Number, default: 0 },
+  balance: { type: Number, default: 0 },
   suspended: {
     status: { type: Number, default: 0 },
     reason: { type: String, default: null }

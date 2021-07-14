@@ -21,19 +21,36 @@
               />
             </div>
           </div>
-          <h2 class="main-title">
-            <uil-key-skeleton-alt height="21px" />
-            Giriş Yap
-          </h2>
+          <h2 class="main-title">Giriş Yap</h2>
           <p class="main-desc">
             Giriş yapmak için lütfen sisteme kayıtlı e-posta adresini ve şifreni
             gir.
           </p>
 
           <form class="login-form">
-            <input type="text" placeholder="E-posta Adresi" />
-            <input type="password" placeholder="Şifre" />
-            <button class="button-submit">Giriş Yap</button>
+            <div class="i-group">
+              <input
+                type="email"
+                placeholder="E-posta Adresi"
+                class="f-control"
+              />
+              <div class="group-icon">
+                <span>
+                  <uil-envelope height="25px" />
+                </span>
+              </div>
+            </div>
+
+            <div class="i-group">
+              <input type="password" placeholder="Şifre" class="f-control" />
+              <div class="group-icon">
+                <span>
+                  <uil-key-skeleton-alt height="25px" />
+                </span>
+              </div>
+            </div>
+
+            <button class="button b-block b-bold">Giriş Yap</button>
           </form>
         </div>
         <div class="overlay">
@@ -50,12 +67,17 @@
 </template>
 
 <script>
-import { UilUserSquare, UilKeySkeletonAlt } from "@iconscout/vue-unicons";
+import {
+  UilUserSquare,
+  UilKeySkeletonAlt,
+  UilEnvelope,
+} from "@iconscout/vue-unicons";
 
 export default {
   components: {
     UilUserSquare,
     UilKeySkeletonAlt,
+    UilEnvelope,
   },
 };
 </script>
