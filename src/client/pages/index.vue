@@ -12,7 +12,7 @@
       </span>
     </div>
     <ul class="transactions">
-      <li>
+      <li class="price-down">
         <div class="avatar">
           <img
             src="https://media-exp3.licdn.com/dms/image/C4D0BAQH4WN-964jlZA/company-logo_200_200/0/1611347723652?e=1632355200&v=beta&t=p4tf0D16kuuAyBHK26MnMj5G37hdtTXYdsBdJqVM7ZA"
@@ -24,14 +24,14 @@
           <div class="desc">Giden Transfer</div>
         </div>
         <div class="values">
-          <div class="price"><span>₺127,54</span></div>
+          <div class="price"><span>- ₺127,54</span></div>
           <div class="date">18.06.2021</div>
         </div>
         <div class="icon">
           <uil-arrow-down size="25px" />
         </div>
       </li>
-      <li v-for="n in 20" :key="n">
+      <li v-for="n in 20" class="price-up" :key="n">
         <div class="avatar">
           <img src="https://cdn.datafex.com.tr/fgjC8t.jpg" alt="" />
         </div>
@@ -40,7 +40,7 @@
           <div class="desc">Gelen Transfer</div>
         </div>
         <div class="values">
-          <div class="price"><span>₺92,40</span></div>
+          <div class="price"><span>+ ₺92,40</span></div>
           <div class="date">16.06.2021</div>
         </div>
         <div class="icon">
@@ -69,3 +69,6 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+</style>

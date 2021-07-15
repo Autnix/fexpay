@@ -1,10 +1,3 @@
-:root {
-  --b-color-primary: #5660F2;
-  --b-color-danger: #dc3545;
-  --b-color-warning: #ffc107;
-  --b-color-secondary: #343a40;
-}
-
 .button {
   padding: 10px;
   font-size: 14px;
@@ -77,4 +70,10 @@
   background-color: var(--b-color-secondary) !important;
   color: white !important;
 }
+
+.b-success {
+  background-color: var(--b-color-success) !important;
+  color: white !important;
+}
+
 

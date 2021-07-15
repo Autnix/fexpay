@@ -2,7 +2,7 @@
   <div class="profile-info-bar">
     <div class="profile">
       <div class="avatar">
-        <img src="https://cdn.datafex.com.tr/fgjC8t.jpg" alt="" />
+        <img src="~/assets/img/default-avatar.jpg" alt="" />
       </div>
       <div class="details">
         <span class="profile-name">Atakan Ünal</span>

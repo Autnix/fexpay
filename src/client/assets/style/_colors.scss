@@ -49,7 +49,17 @@
   --dark-rgb: 0,0,0;
   --primary-color: #5760F3;
   --primary-color-rgb: 87, 96, 243;
+  --b-color-success: #149b33;
 
+
+}
+
+:root {
+  --b-color-primary: #5660F2;
+  --b-color-danger: #dc3545;
+  --b-color-warning: #ffc107;
+  --b-color-secondary: #343a40;
+  --b-color-success: #95FFA4;
 }
 
 .main {
