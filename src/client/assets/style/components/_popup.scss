@@ -1,0 +1,51 @@
+.bottom-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.3);
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: 200ms all;
+
+  label {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .popup-container {
+    position: absolute;
+    z-index: 700;
+    bottom: 0;
+    width: 85%;
+    min-height: 250px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 250px;
+    background-color: #1B2864;
+    transform: translateY(100%);
+    transition: 200ms all;
+  }
+
+}
+
+#popup-checkbox {
+
+  display: none;
+
+  &:checked + .bottom-popup {
+      visibility: visible;
+      opacity: 1;
+      .popup-container {
+      transform: translateY(0%);
+      }
+    }
+
+}

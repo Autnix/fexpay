@@ -27,7 +27,8 @@
     "ioredis": "^4.27.6",
     "mongoose": "^5.13.2",
     "nuxt": "^2.15.7",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "vue-phone-number-input": "^1.1.10"
   },
   "devDependencies": {
     "@nuxt/test-utils": "^0.2.2",
