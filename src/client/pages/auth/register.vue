@@ -28,9 +28,11 @@
         <form class="login-form" @submit.prevent="registerEvent()">
           <div class="i-group">
             <input
+              v-model="user.fullname"
               type="text"
               class="f-control"
               placeholder="Adınız ve soyadınız"
+              required
             />
             <div class="group-icon">
               <span>
@@ -41,9 +43,11 @@
 
           <div class="i-group">
             <input
+              v-model="user.email"
               type="email"
               placeholder="E-posta Adresi"
               class="f-control"
+              required
             />
             <div class="group-icon">
               <span>
@@ -70,7 +74,13 @@
           <!-- </client-only> -->
 
           <div class="i-group">
-            <input type="password" placeholder="Şifre" class="f-control" />
+            <input
+              v-model="user.password"
+              type="password"
+              placeholder="Şifre"
+              class="f-control"
+              required
+            />
             <div class="group-icon">
               <span>
                 <uil-key-skeleton-alt height="25px" />
@@ -94,7 +104,45 @@
     <input type="checkbox" id="popup-checkbox" v-model="bottomPopupCheckbox" />
     <div class="bottom-popup">
       <label for="popup-checkbox"></label>
-      <div class="popup-container"></div>
+      <div class="popup-container">
+        <div class="container-fix">
+          <div class="popup-head">
+            <div class="head-title">
+              <h2>Telefonunu Onayla</h2>
+            </div>
+            <div class="head-icon">
+              <uil-comment-alt-shield
+                size="45px"
+                style="fill: var(--b-color-primary)"
+              />
+            </div>
+          </div>
+
+          <form class="popup-form" @submit.prevent="register()">
+            <div class="form-elements">
+              <vue-phone-number-input
+                v-model="user.phone"
+                :dark="$store.state.dark_mode"
+                default-country-code="TR"
+                dark-color="#273973"
+                valid-color="#E3E8FD"
+                :border-radius="3"
+                :no-example="true"
+                :countries-height="20"
+                :show-code-on-list="true"
+                :translations="{
+                  countrySelectorLabel: 'Ülke Kodu',
+                  phoneNumberLabel: 'Telefon Numarası',
+                  example: 'Örnek:',
+                }"
+              />
+            </div>
+            <div class="form-submit-area">
+              <button class="button b-block b-bold">Devam et</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -104,24 +152,40 @@ import {
   UilUser,
   UilKeySkeletonAlt,
   UilEnvelope,
+  UilMobileAndroid,
+  UilCommentAltShield,
 } from "@iconscout/vue-unicons";
 
 export default {
   data() {
     return {
-      myData: null,
       bottomPopupCheckbox: false,
+      user: {
+        fullname: null,
+        email: null,
+        password: null,
+        phone: null,
+      },
     };
   },
   components: {
     UilUser,
     UilKeySkeletonAlt,
     UilEnvelope,
+    UilMobileAndroid,
+    UilCommentAltShield,
   },
   layout: "auth",
   methods: {
     registerEvent() {
       this.bottomPopupCheckbox = true;
+    },
+    async register() {
+      let { user } = await this.$axios
+        .post("/auth/register", this.user)
+        .then((res) => res.data);
+
+      console.log(user);
     },
   },
 };

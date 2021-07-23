@@ -61,6 +61,7 @@
 import { UilBars, UilSearch, UilUser } from "@iconscout/vue-unicons";
 
 export default {
+  middleware: ["auth"],
   components: {
     UilBars,
     UilSearch,

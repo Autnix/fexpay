@@ -32,7 +32,7 @@
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/api/auth/logout">
             <uil-sign-out-alt size="20px" />
           </a>
         </li>

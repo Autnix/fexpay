@@ -15,6 +15,7 @@
   --light-rgb: 0,0,0;
   --dark: #FFF;
   --dark-rgb: 255,255,255;
+  --card-color-display: #1B2864;
 
 }
 
@@ -50,16 +51,22 @@
   --primary-color: #5760F3;
   --primary-color-rgb: 87, 96, 243;
   --b-color-success: #149b33;
+  --card-color-display: #F3F7FE;
 
 
 }
 
 :root {
   --b-color-primary: #5660F2;
+  --b-color-primary-rgb: 86, 96, 242;
   --b-color-danger: #dc3545;
+  --b-color-danger-rgb: 220, 53, 69;
   --b-color-warning: #ffc107;
+  --b-color-warning-rgb: 255, 193, 7;
   --b-color-secondary: #343a40;
+  --b-color-secondary-rgb: 52, 58, 64;
   --b-color-success: #95FFA4;
+  --b-color-success-rgb: 149, 255, 164;
 }
 
 .main {

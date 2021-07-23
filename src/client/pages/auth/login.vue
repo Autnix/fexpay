@@ -26,9 +26,11 @@
           gir.
         </p>
 
-        <form class="login-form">
+        <form class="login-form" @submit.prevent="login()">
+          <alert v-if="error.status" :text="error.text" />
           <div class="i-group">
             <input
+              v-model="user.email"
               type="email"
               placeholder="E-posta Adresi"
               class="f-control"
@@ -41,7 +43,12 @@
           </div>
 
           <div class="i-group">
-            <input type="password" placeholder="Şifre" class="f-control" />
+            <input
+              v-model="user.password"
+              type="password"
+              placeholder="Şifre"
+              class="f-control"
+            />
             <div class="group-icon">
               <span>
                 <uil-key-skeleton-alt height="25px" />
@@ -68,7 +75,46 @@
 </template>
 
 <script>
+import { UilKeySkeletonAlt, UilEnvelope } from "@iconscout/vue-unicons";
+
 export default {
   layout: "auth",
+  components: {
+    UilKeySkeletonAlt,
+    UilEnvelope,
+  },
+  data() {
+    return {
+      user: {
+        email: null,
+        password: null,
+      },
+      error: {
+        status: false,
+        text: null,
+      },
+    };
+  },
+  methods: {
+    async login() {
+      this.error.status = false;
+
+      let data = await this.$axios
+        .post("/auth/login", this.user)
+        .then((res) => res.data)
+        .catch((err) => {
+          this.error = {
+            status: true,
+            text: err.response.data.message,
+          };
+          return null;
+        });
+
+      if (!data) return;
+
+      await this.$store.dispatch("user/login", data.user);
+      this.$router.push("/");
+    },
+  },
 };
 </script>

@@ -24,14 +24,36 @@
     position: absolute;
     z-index: 700;
     bottom: 0;
-    width: 85%;
-    min-height: 250px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    height: 250px;
-    background-color: #1B2864;
+    width: 100%;
+    // min-height: 250px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    // height: 250px;
+    background-color: var(--card-color-display);
     transform: translateY(100%);
     transition: 200ms all;
+    display: flex;
+    justify-content: center;
+    .container-fix {
+      width: 80%;
+      max-width: var(--max-width);
+      padding: 80px 0;
+      .popup-head {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        .head-title h2 {
+          font-weight: 500;
+          letter-spacing: .5px;
+          font-size: 22px;
+        }
+      }
+      .popup-form {
+        margin-bottom: 30px;
+      }
+    }
   }
 
 }

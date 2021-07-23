@@ -18,12 +18,21 @@ app.use(express.json());
 Route.use(app);
 
 app.get("/", async (req, res) => {
+  console.log(req.session.user);
 
   res.status(200).json({
     PATH: "/",
     ROUTE_NAME: "index",
     status: 200
   })
+})
+
+app.get("/server-init", (req, res) => {
+
+  res.json({
+    session: req.session
+  })
+
 })
 
 app.get('/set-data', (req, res) => {

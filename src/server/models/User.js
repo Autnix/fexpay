@@ -8,14 +8,14 @@ module.exports = models.users || model('users', new Schema({
     phone: String,
     avatarUrl: { type: String, default: "" }
   },
+  email: { type: String, required: true, unique: true },
   auth: {
-    email: { type: String, required: true },
     password: { type: String, required: true },
     salt: { type: String, required: true }
   },
   accountType: { type: Number, default: 0 },
   betaUser: { type: Number, default: 0 },
-  validate: { type: Number, default: 0 },
+  validateUser: { type: Number, default: 0 },
   balance: { type: Number, default: 0 },
   suspended: {
     status: { type: Number, default: 0 },
