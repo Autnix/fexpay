@@ -14,11 +14,11 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ dispatch }, { $axios }) {
 
-    let { session } = await $axios.get("/server-init")
-      .then(res => res.data)
+    // let { session } = await $axios.get("/server-init")
+    //   .then(res => res.data)
 
-    if (session?.user)
-      dispatch('user/login', session.user)
+    // if (session?.user)
+    //   dispatch('user/login', session.user)
 
   },
   toggleTheme({ commit }) {
