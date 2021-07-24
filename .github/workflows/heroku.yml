@@ -23,3 +23,5 @@ jobs:
           HD_API_PATH: ${{secrets.HEROKU_ENV_API_PATH}}
           HD_API_SSL: ${{secrets.HEROKU_ENV_API_SSL}}
           HD_MONGO_URI: ${{secrets.HEROKU_ENV_MONGO_URI}}
+          HD_REDIS_URI: ${{secrets.HEROKU_REDIS_URI}}
+          HD_NODE_TLS_REJECT_UNAUTHORIZED: 0

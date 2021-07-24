@@ -4,19 +4,18 @@ const { model, models, Schema } = require('mongoose')
 
 module.exports = models.users || model('users', new Schema({
   info: {
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
+    fullname: { type: String, required: true },
     phone: String,
     avatarUrl: { type: String, default: "" }
   },
+  email: { type: String, required: true, unique: true },
   auth: {
-    email: { type: String, required: true },
     password: { type: String, required: true },
     salt: { type: String, required: true }
   },
   accountType: { type: Number, default: 0 },
   betaUser: { type: Number, default: 0 },
-  validate: { type: Number, default: 0 },
+  validateUser: { type: Number, default: 0 },
   balance: { type: Number, default: 0 },
   suspended: {
     status: { type: Number, default: 0 },
@@ -25,8 +24,7 @@ module.exports = models.users || model('users', new Schema({
   bank_accounts: [
     {
       bank: String,
-      firstname: String,
-      lastname: String,
+      fullname: String,
       account_number: String
     }
   ],
