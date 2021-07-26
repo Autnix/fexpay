@@ -56,23 +56,6 @@
             </div>
           </div>
 
-          <!-- <client-only> -->
-          <!-- <vue-phone-number-input
-            v-model="myData"
-            :dark="$store.state.dark_mode"
-            default-country-code="TR"
-            dark-color="#273973"
-            valid-color="#E3E8FD"
-            :border-radius="3"
-            :no-example="false"
-            :translations="{
-              countrySelectorLabel: 'Ülke Kodu',
-              phoneNumberLabel: 'Telefon Numarası',
-              example: 'Örnek:',
-            }"
-          /> -->
-          <!-- </client-only> -->
-
           <div class="i-group">
             <input
               v-model="user.password"
@@ -103,9 +86,12 @@
     </div>
     <input type="checkbox" id="popup-checkbox" v-model="bottomPopupCheckbox" />
     <div class="bottom-popup">
-      <label for="popup-checkbox"></label>
+      <label class="popup-label"></label>
       <div class="popup-container">
         <div class="container-fix">
+          <div class="popup-alerts" v-if="error.status">
+            <alert :text="error.text" :icon="true" />
+          </div>
           <div class="popup-head">
             <div class="head-title">
               <h2>Telefonunu Onayla</h2>
@@ -118,7 +104,11 @@
             </div>
           </div>
 
-          <form class="popup-form" @submit.prevent="register()">
+          <form
+            class="popup-form"
+            @submit.prevent="register()"
+            v-if="popupPage == 1"
+          >
             <div class="form-elements">
               <vue-phone-number-input
                 v-model="user.phone"
@@ -135,10 +125,70 @@
                   phoneNumberLabel: 'Telefon Numarası',
                   example: 'Örnek:',
                 }"
+                @update="onPhoneUpdate"
               />
             </div>
+
+            <div class="form-submit-area flexible-division">
+              <div class="f-1">
+                <label
+                  type="button"
+                  for="popup-checkbox"
+                  class="button b-secondary b-block b-bold"
+                >
+                  Kapat
+                </label>
+              </div>
+              <div class="f-1">
+                <button
+                  class="button b-block b-bold"
+                  :class="{ 'b-loading': loading }"
+                  :disabled="loading == 1"
+                >
+                  Devam et
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <form class="popup-form" @submit.prevent="confirmUser()" v-else>
+            <p class="form-desc">
+              <strong>{{ user.phoneFormatted }}</strong> numaralı telefonunuza
+              bir doğrulama kodu gönderdik. Lütfen doğrulama kodunu aşağıda size
+              ayrılmış alana girin ve üyeliğinizi tamamlayın.
+            </p>
+            <div class="form-elements">
+              <input
+                v-model="verificationCode"
+                type="number"
+                class="f-control"
+                placeholder="Doğrulama Kodunuz"
+                pattern="[0-9]"
+                @input="formatCode()"
+                :required="true"
+              />
+              <small class="timer-info" v-if="phoneTimer != 0"
+                >Doğrulama kodunu tekrar göndermek için {{ phoneTimer }} saniye
+                bekleyin.
+              </small>
+              <small class="timer-info" v-else>
+                <a
+                  href="javascript:;"
+                  style="color: var(--primary-color)"
+                  @click.prevent="resendCode()"
+                  >Doğrulama kodunu tekrar gönder</a
+                >
+              </small>
+            </div>
+
             <div class="form-submit-area">
-              <button class="button b-block b-bold">Devam et</button>
+              <button
+                class="button b-block b-bold"
+                :class="{ 'b-loading': loading }"
+                :disabled="loading == 1"
+              >
+                Hesabı doğrula
+              </button>
             </div>
           </form>
         </div>
@@ -165,7 +215,17 @@ export default {
         email: null,
         password: null,
         phone: null,
+        phoneFormatted: null,
+        phoneValid: false,
       },
+      error: {
+        status: false,
+        text: null,
+      },
+      popupPage: 1,
+      phoneTimer: 30,
+      verificationCode: null,
+      loading: 0,
     };
   },
   components: {
@@ -180,12 +240,98 @@ export default {
     registerEvent() {
       this.bottomPopupCheckbox = true;
     },
-    async register() {
-      let { user } = await this.$axios
-        .post("/auth/register", this.user)
-        .then((res) => res.data);
+    timerStart() {
+      this.phoneTimer = 30;
+      let interval = setInterval(() => {
+        if (this.phoneTimer - 1 == 0) {
+          clearInterval(interval);
+        }
+        this.phoneTimer = this.phoneTimer - 1;
+      }, 1000);
+    },
+    async resendCode() {
+      this.error.status = false;
+      let data = await this.$axios
+        .post("/auth/resend-verification-code", this.user)
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          this.error = {
+            status: true,
+            text: err.response.data.message,
+          };
+          return null;
+        });
 
-      console.log(user);
+      if (data) {
+        this.timerStart();
+      }
+    },
+    async register() {
+      this.loading = 1;
+      this.error.status = false;
+
+      if (!this.user.phoneValid) {
+        this.loading = 0;
+        return (this.error = {
+          status: true,
+          text: "Lütfen telefon numaranızı doğru girdiğinizden emin olun!",
+        });
+      }
+
+      let data = await this.$axios
+        .post("/auth/register", this.user)
+        .then((res) => {
+          this.popupPage = 2;
+          this.timerStart();
+          return res.data;
+        })
+        .catch((err) => {
+          this.error = {
+            status: true,
+            text: err.response.data.message,
+          };
+          return null;
+        });
+      this.loading = 0;
+    },
+    async confirmUser() {
+      this.loading = 1;
+      this.error.status = false;
+      let data = await this.$axios
+        .post("/auth/verify-phone", {
+          phone: this.user.phoneFormatted,
+          code: this.verificationCode,
+        })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          this.error = {
+            status: true,
+            text: err.response.data.message,
+          };
+          this.loading = 0;
+          return null;
+        });
+
+      if (!data) return;
+
+      let login = await this.$axios.post("/auth/login", this.user);
+
+      await this.$store.dispatch("user/login", data.user);
+      this.$router.push("/");
+      this.loading = 0;
+    },
+    onPhoneUpdate(payload) {
+      this.user.phoneValid = payload.isValid;
+      this.user.phoneFormatted = payload.formattedNumber;
+    },
+    formatCode() {
+      this.verificationCode = this.verificationCode.replace(/[^\d]/g, "");
+      if (this.verificationCode.length >= 6)
+        this.verificationCode = this.verificationCode.slice(0, 6);
     },
   },
 };

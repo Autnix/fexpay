@@ -1,6 +1,33 @@
 <template>
   <div class="page">
     <div class="card mb-inline">
+      <input
+        class="clock"
+        type="text"
+        maxlength="1"
+        size="1"
+        onkeyup="next(2)"
+      />
+      <input
+        id="2"
+        class="clock"
+        type="text"
+        maxlength="1"
+        size="1"
+        onkeyup="next(3)"
+      />
+      <input
+        id="3"
+        class="clock"
+        type="text"
+        maxlength="1"
+        size="1"
+        onkeyup="next(4)"
+      />
+      <input id="4" class="clock" type="text" maxlength="1" size="1" />
+    </div>
+
+    <div class="card mb-inline">
       <button class="button">Button</button>
       <button class="button b-bold">Button Bold</button>
       <button class="button b-block">Button Block</button>

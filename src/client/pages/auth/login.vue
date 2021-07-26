@@ -56,7 +56,13 @@
             </div>
           </div>
 
-          <button class="button b-block b-bold">Giriş Yap</button>
+          <button
+            class="button b-block b-bold"
+            :class="{ 'b-loading': loading }"
+            :disabled="loading == 1"
+          >
+            Giriş Yap
+          </button>
         </form>
       </div>
       <div class="overlay">
@@ -93,10 +99,12 @@ export default {
         status: false,
         text: null,
       },
+      loading: false,
     };
   },
   methods: {
     async login() {
+      this.loading = 1;
       this.error.status = false;
 
       let data = await this.$axios
@@ -107,6 +115,7 @@ export default {
             status: true,
             text: err.response.data.message,
           };
+          this.loading = 0;
           return null;
         });
 

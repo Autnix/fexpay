@@ -10,6 +10,7 @@
   background-color: #5660F2;
   color: white;
   position: relative;
+  text-align: center;
 
   &:hover::after {
     visibility: visible;
@@ -74,6 +75,32 @@
 .b-success {
   background-color: var(--b-color-success) !important;
   color: white !important;
+}
+
+.b-loading {
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: rgba(255,255,255,.2);
+    animation: loadingButtonAnimation 1s linear infinite;
+  }
+}
+
+@keyframes loadingButtonAnimation {
+  
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+
 }
 
 

@@ -11,7 +11,8 @@ module.exports = models.users || model('users', new Schema({
   email: { type: String, required: true, unique: true },
   auth: {
     password: { type: String, required: true },
-    salt: { type: String, required: true }
+    salt: { type: String, required: true },
+    verificationCode: { type: Number, default: (Math.floor((Math.random() * (999999 - 100000) + 100000))) }
   },
   accountType: { type: Number, default: 0 },
   betaUser: { type: Number, default: 0 },
