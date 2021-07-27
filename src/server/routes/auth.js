@@ -89,7 +89,7 @@ Router.post("/register", async (req, res) => {
 
   let foundUser = await User.find({
     $or: [
-      { phone: phoneFormatted },
+      { 'info.phone': phoneFormatted },
       { email }
     ]
   })
