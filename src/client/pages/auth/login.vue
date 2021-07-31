@@ -122,7 +122,7 @@ export default {
       if (!data) return;
 
       await this.$store.dispatch("user/login", data.user);
-      this.$router.push("/");
+      this.$router.push("/dashboard");
     },
   },
 };

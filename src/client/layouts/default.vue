@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <input type="checkbox" class="form-control" id="bar-id" />
-    <div class="main" :class="{ light: !$store.state.dark_mode }">
+    <div class="main" :class="{ light: lightMode }">
       <label for="bar-id" class="backdrop"></label>
       <input type="checkbox" class="form-control" id="user-id" />
       <uiLeftbar />
@@ -71,6 +71,11 @@ export default {
     return {
       dark_mode: false,
     };
+  },
+  computed: {
+    lightMode() {
+      return !this.$store.state.dark_mode;
+    },
   },
   async mounted() {},
 };

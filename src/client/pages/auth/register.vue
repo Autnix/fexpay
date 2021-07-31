@@ -321,7 +321,7 @@ export default {
       let login = await this.$axios.post("/auth/login", this.user);
 
       await this.$store.dispatch("user/login", data.user);
-      this.$router.push("/");
+      this.$router.push("/dashboard");
       this.loading = 0;
     },
     onPhoneUpdate(payload) {

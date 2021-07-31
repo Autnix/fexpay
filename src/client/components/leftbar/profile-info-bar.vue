@@ -2,10 +2,12 @@
   <div class="profile-info-bar">
     <div class="profile">
       <div class="avatar">
-        <img src="~/assets/img/default-avatar.jpg" alt="" />
+        <img :src="getUserAvatar" alt="" />
       </div>
       <div class="details">
-        <span class="profile-name">Atakan Ünal</span>
+        <span class="profile-name">{{
+          $store.state.user.data.info.fullname
+        }}</span>
         <span class="profile-status">Active</span>
       </div>
       <div class="more">
@@ -43,7 +45,9 @@
     </div>
     <div class="balance">
       <div class="balance-data">
-        <span class="balance-value"> 269.50 ₺ </span>
+        <span class="balance-value">
+          {{ $store.state.user.data.balance.toFixed(2) }} ₺
+        </span>
         <span class="balance-subtitle"> Hesap Bakiyesi </span>
       </div>
       <div class="balance-more">
@@ -90,6 +94,16 @@ export default {
       await this.$store.dispatch("toggleTheme");
     },
   },
+  computed: {
+    getUserAvatar() {
+      return this.getUser.info.defaultAvatar
+        ? `https://avatars.dicebear.com/api/initials/${this.getUser.info.fullname}.svg?background=%23274AD2`
+        : this.getUser.info.avatarUrl;
+    },
+    getUser() {
+      return this.$store.state.user.data;
+    },
+  },
 };
 </script>
 
@@ -111,7 +125,7 @@ export default {
         height: calc(var(--height) - calc(var(--padding) * 2));
         width: calc(var(--height) - calc(var(--padding) * 2));
         border-radius: 5px;
-        border: 3px solid var(--primary-color);
+        // border: 2px solid var(--primary-color);
       }
     }
     .details {

@@ -1,5 +1,5 @@
 <template>
-  <div class="main auth" :class="{ light: !$store.state.dark_mode }">
+  <div class="main auth" :class="{ light: lightMode }">
     <Nuxt />
   </div>
 </template>
@@ -17,6 +17,11 @@ export default {
     UilKeySkeletonAlt,
     UilEnvelope,
   },
+  computed: {
+    lightMode() {
+      return !this.$store.state.dark_mode
+    }
+  }
 };
 </script>
 

@@ -10,10 +10,13 @@
           <span>Bilal Atakan Ünal</span>
         </div>
         <div class="numbers">
-          <span class="digit">5550</span>
-          <span class="digit">55**</span>
-          <span class="digit">****</span>
-          <span class="digit">**55</span>
+          <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="digit">4255</span>
         </div>
         <div class="due-date">
           <div class="date">
@@ -32,10 +35,13 @@
           <span>Bilal Atakan Ünal</span>
         </div>
         <div class="numbers">
-          <span class="digit">4444</span>
-          <span class="digit">44**</span>
-          <span class="digit">****</span>
-          <span class="digit">**44</span>
+          <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="digit">4255</span>
         </div>
         <div class="due-date">
           <div class="date">
@@ -54,9 +60,13 @@
           <span>Bilal Atakan Ünal</span>
         </div>
         <div class="numbers">
-          <span class="digit">2222</span>
-          <span class="digit">55****</span>
-          <span class="digit">**12</span>
+          <div class="dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <span class="digit">4255</span>
         </div>
         <div class="due-date">
           <div class="date">
@@ -174,8 +184,8 @@ hr {
         padding: 10px;
         .badge-st {
           position: absolute;
-          top: 10px;
-          right: 10px;
+          top: 0px;
+          right: 0px;
           font-weight: 500;
           font-family: "Rubik", sans-serif;
           font-size: 10px;
@@ -197,13 +207,30 @@ hr {
       .numbers {
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         padding: 10px;
         align-items: center;
         .digit {
           letter-spacing: 3px;
           font-size: 18px;
           font-weight: 600;
+        }
+        .dots {
+          display: flex;
+          margin-right: 10px;
+          .dot {
+            --height: 6px;
+            margin-right: 5px;
+            &::after {
+              content: "";
+              height: var(--height);
+              width: var(--height);
+              min-width: var(--height);
+              border-radius: 50%;
+              background-color: white;
+              display: block;
+            }
+          }
         }
       }
       .due-date {

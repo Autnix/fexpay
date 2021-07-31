@@ -6,7 +6,8 @@ module.exports = models.users || model('users', new Schema({
   info: {
     fullname: { type: String, required: true },
     phone: String,
-    avatarUrl: { type: String, default: "" }
+    avatarUrl: { type: String, default: "" },
+    defaultAvatar: { type: Boolean, default: true }
   },
   email: { type: String, required: true, unique: true },
   auth: {
@@ -18,6 +19,10 @@ module.exports = models.users || model('users', new Schema({
   betaUser: { type: Number, default: 0 },
   validateUser: { type: Number, default: 0 },
   balance: { type: Number, default: 0 },
+  interests: {
+    creditCard: { type: Number, default: 0.07 },
+    fexpayAccount: { type: Number, defauilt: 0 }
+  },
   suspended: {
     status: { type: Number, default: 0 },
     reason: { type: String, default: null }
