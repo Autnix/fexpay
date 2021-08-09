@@ -17,7 +17,7 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.0",
     "card-validator": "^8.1.1",
     "connect-redis": "^6.0.0",
     "core-js": "^3.15.2",
