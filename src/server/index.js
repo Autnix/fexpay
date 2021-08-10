@@ -2,10 +2,11 @@ require('dotenv').config();
 require('./mongo');
 const express = require('express');
 const app = express();
-const Redis = require('./redis');
 const session = require('express-session');
 const RedisStore = require('connect-redis')(session)
+const Redis = require('./redis');
 const Route = require('./route');
+const Shop = require('./models/Shop');
 
 app.use(session({
   store: new RedisStore({ client: Redis }),
@@ -17,8 +18,7 @@ app.use(session({
 app.use(express.json());
 Route.use(app);
 
-app.get("/", async (req, res) => {
-  console.log(req.session.user);
+app.get("/", (req, res) => {
 
   res.status(200).json({
     PATH: "/",
@@ -46,9 +46,29 @@ app.get('/set-data', (req, res) => {
 })
 
 
+app.get('/demo', async (req, res) => {
+
+  // console.log(req.session);
+
+  const shop = new Shop({
+    owner: req.session?.user?._id,
+    info: {
+      name: "TEST URUN",
+      website: "blabla.com"
+    }
+  })
+
+  await shop.save();
+
+  res.json({
+    ok: "ok"
+  })
+
+})
+
 app.get("/get-data", async (req, res) => {
 
-  let data = await Redis.get("name");
+  const data = await Redis.get("name");
 
   res.json({
     data
@@ -65,10 +85,10 @@ app.get("/set-session", (req, res) => {
 
 })
 
-app.get("/get-session", async (req, res) => {
+app.get("/get-session", (req, res) => {
 
 
-  let data = req.session.name;
+  const data = req.session.name;
 
   res.json({
     data

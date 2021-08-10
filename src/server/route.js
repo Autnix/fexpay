@@ -7,7 +7,7 @@ module.exports = {
 
     let md, filename;
 
-    for (file of files) {
+    for (const file of files) {
 
       filename = file.split(".")[0];
 

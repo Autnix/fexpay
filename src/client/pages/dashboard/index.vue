@@ -31,7 +31,7 @@
           <uil-arrow-down size="25px" />
         </div>
       </li>
-      <li v-for="n in 20" class="price-up" :key="n">
+      <li v-for="n in 20" :key="n" class="price-up">
         <div class="avatar">
           <img src="https://cdn.datafex.com.tr/fgjC8t.jpg" alt="" />
         </div>
@@ -54,18 +54,14 @@
 
 <script>
 import {
-  UilBill,
   UilArrowDown,
   UilArrowUp,
-  UilWallet,
 } from "@iconscout/vue-unicons";
 
 export default {
   components: {
-    UilBill,
     UilArrowDown,
     UilArrowUp,
-    UilWallet,
   },
 };
 </script>

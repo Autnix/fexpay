@@ -3,9 +3,9 @@ const APP_ENV = require('../../config/env');
 
 mongoose.connect(APP_ENV.MONGO_URI, { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => {
-    console.log("🚀 MongoDB connected!");
+    console.warn("🚀 MongoDB connected!");
   })
   .catch(err => {
-    console.log(`❌ MongoDB Connection Failed: ${err}`);
+    console.error(`❌ MongoDB Connection Failed: ${err}`);
   })
 

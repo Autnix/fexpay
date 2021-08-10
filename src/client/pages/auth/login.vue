@@ -84,11 +84,11 @@
 import { UilKeySkeletonAlt, UilEnvelope } from "@iconscout/vue-unicons";
 
 export default {
-  layout: "auth",
   components: {
     UilKeySkeletonAlt,
     UilEnvelope,
   },
+  layout: "auth",
   data() {
     return {
       user: {
@@ -107,7 +107,7 @@ export default {
       this.loading = 1;
       this.error.status = false;
 
-      let data = await this.$axios
+      const data = await this.$axios
         .post("/auth/login", this.user)
         .then((res) => res.data)
         .catch((err) => {

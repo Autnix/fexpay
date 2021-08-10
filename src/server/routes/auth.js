@@ -1,8 +1,8 @@
 const express = require('express');
 const Router = express.Router()
-const User = require('../models/User');
 const { v4: uuidv4 } = require('uuid');
 const HmacSHA256 = require('crypto-js/hmac-sha256');
+const User = require('../models/User');
 const Redis = require('../redis');
 
 const gsm = require("../netgsm");
@@ -17,12 +17,12 @@ Router.get('/', (req, res) => {
 
 Router.post("/login", async (req, res) => {
 
-  let {
+  const {
     email,
     password
   } = req.body
 
-  let user = await User.findOne({ "email": email })
+  const user = await User.findOne({ email })
 
   if (!user || !user.validateUser) {
     return res.status(403).json({
@@ -31,9 +31,9 @@ Router.post("/login", async (req, res) => {
     })
   }
 
-  let pass = HmacSHA256(password, user.auth.salt).toString();
+  const pass = HmacSHA256(password, user.auth.salt).toString();
 
-  if (pass != user.auth.password) {
+  if (pass !== user.auth.password) {
     return res.status(403).json({
       status: 403,
       message: "Eposta adresi veya şifre hatalı!"
@@ -54,11 +54,10 @@ Router.post("/login", async (req, res) => {
 
 Router.post("/register", async (req, res) => {
 
-  let {
+  const {
     fullname,
     email,
     password,
-    phone,
     phoneFormatted
   } = req.body
 
@@ -66,12 +65,12 @@ Router.post("/register", async (req, res) => {
 
   // ? VALIDATE VALUES
 
-  let phoneValidation = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim;
-  let emailValidation = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm;
+  const phoneValidation = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/gim;
+  const emailValidation = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm;
 
 
-  let validatePhone = phoneValidation.test(phoneFormatted),
-    validateEmail = emailValidation.test(email);
+  const validatePhone = phoneValidation.test(phoneFormatted);
+  const validateEmail = emailValidation.test(email);
 
   if (!validatePhone)
     return res.status(403).json({
@@ -98,7 +97,7 @@ Router.post("/register", async (req, res) => {
 
     foundUser = foundUser[0];
 
-    if (foundUser.validateUser == 0) {
+    if (foundUser.validateUser === 0) {
       await User.findByIdAndDelete(foundUser._id);
     } else {
       return res.status(403).json({
@@ -113,7 +112,7 @@ Router.post("/register", async (req, res) => {
   const salt = uuidv4();
   const pass = HmacSHA256(password, salt).toString();
 
-  let user = new User({
+  const user = new User({
     info: {
       fullname,
       phone: phoneFormatted,
@@ -127,15 +126,15 @@ Router.post("/register", async (req, res) => {
 
   // * HEROKU DEPLOY CHECK
 
-  if (process.env.DEPLOY == "HEROKU") {
+  if (process.env.DEPLOY === "HEROKU") {
     user.auth.verificationCode = 111111
   }
 
   // * DATABASE CHECK
 
-  let control = await user.save()
+  const control = await user.save()
     .then(() => true)
-    .catch(err => {
+    .catch(() => {
       res.status(403).json({
         status: 403,
         message: "Bilinmeyen bir hata meydana geldi, lütfen daha sonra tekrar deneyin!"
@@ -157,7 +156,7 @@ Router.post("/register", async (req, res) => {
 
   // * NETGSM API CHECK
 
-  if (verificationSms != "00") {
+  if (verificationSms !== "00") {
     return res.status(403).json({
       status: 403,
       message: "SMS Gönderiminde bir hata meydana geldi, lütfen daha sonra tekrar deneyin!"
@@ -172,7 +171,7 @@ Router.post("/register", async (req, res) => {
 
 Router.post("/verify-phone", async (req, res) => {
 
-  let {
+  const {
     phone,
     code
   } = req.body;
@@ -194,7 +193,7 @@ Router.post("/verify-phone", async (req, res) => {
 
   // * CODE CHECK
 
-  if (code != verificationCode) {
+  if (Number(code) !== verificationCode) {
     return res.status(403).json({
       status: 403,
       message: `Girilen kod hatalı, farklı bir kod deneyin!`
@@ -203,7 +202,9 @@ Router.post("/verify-phone", async (req, res) => {
 
   // ? DATABASE GET USER
 
-  let unregisteredUser = await User.findOne({ "info.phone": phone })
+  const unregisteredUser = await User.findOne({ "info.phone": phone })
+
+  console.warn(unregisteredUser)
 
   // * DATABASE CHECK
 
@@ -216,7 +217,8 @@ Router.post("/verify-phone", async (req, res) => {
 
   // * CODE CHECK
 
-  if (unregisteredUser.auth.verificationCode != code) {
+  if (unregisteredUser.auth.verificationCode !== Number(code)) {
+
     return res.status(403).json({
       status: 403,
       message: `Sistemsel bir hata meydana geldi, lütfen tekrar kayır olmayı deneyin!`
@@ -236,15 +238,15 @@ Router.post("/verify-phone", async (req, res) => {
 
 Router.post("/resend-verification-code", async (req, res) => {
 
-  let {
+  const {
     phoneFormatted
   } = req.body;
 
-  let phone = phoneFormatted;
+  const phone = phoneFormatted;
 
   // * REDIS CHECK FOR EXPIRE TIME
 
-  let exp = await Redis.get(`register:${phoneFormatted}`)
+  const exp = await Redis.get(`register:${phoneFormatted}`)
 
   if (exp && (Number(JSON.parse(exp).sendAt) + 25 * 1000) > (new Date()).getTime())
     return res.status(403).json({
@@ -255,7 +257,7 @@ Router.post("/resend-verification-code", async (req, res) => {
 
   // ? DATABASE GET USER
 
-  let unregisteredUser = await User.findOne({ "info.phone": phone })
+  const unregisteredUser = await User.findOne({ "info.phone": phone })
 
   // * DATABASE CHECK
 
@@ -268,7 +270,7 @@ Router.post("/resend-verification-code", async (req, res) => {
 
   // * USER CHECK
 
-  if (unregisteredUser.validateUser != 0) {
+  if (unregisteredUser.validateUser !== 0) {
     return res.status(403).json({
       status: 403,
       message: `Kullanıcı zaten telefon numarasını onaylamış, giriş yapmayı deneyin!`
@@ -277,7 +279,7 @@ Router.post("/resend-verification-code", async (req, res) => {
 
   // ? GENERATE NEW CODE & SAVE DATABASE
 
-  let newCode = process.env.DEPLOY == "HEROKU" ? 111111 : Math.floor((Math.random() * (999999 - 100000) + 100000))
+  const newCode = process.env.DEPLOY === "HEROKU" ? 111111 : Math.floor((Math.random() * (999999 - 100000) + 100000))
 
   unregisteredUser.auth.verificationCode = newCode;
   await unregisteredUser.save();
@@ -294,7 +296,7 @@ Router.post("/resend-verification-code", async (req, res) => {
 
   // * NETGSM API CHECK
 
-  if (verificationSms != "00") {
+  if (verificationSms !== "00") {
     return res.status(403).json({
       status: 403,
       message: "SMS Gönderiminde bir hata meydana geldi, lütfen daha sonra tekrar deneyin!"

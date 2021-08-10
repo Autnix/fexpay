@@ -14,7 +14,7 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ dispatch }, { $axios }) {
 
-    let { session } = await $axios.get("/server-init")
+    const { session } = await $axios.get("/server-init")
       .then(res => res.data)
 
     if (session?.user)

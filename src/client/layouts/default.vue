@@ -1,9 +1,9 @@
 <template>
   <div class="index">
-    <input type="checkbox" class="form-control" id="bar-id" />
+    <input id="bar-id" type="checkbox" class="form-control" />
     <div class="main" :class="{ light: lightMode }">
       <label for="bar-id" class="backdrop"></label>
-      <input type="checkbox" class="form-control" id="user-id" />
+      <input id="user-id" type="checkbox" class="form-control" />
       <uiLeftbar />
       <div class="content">
         <div class="page">
@@ -61,12 +61,12 @@
 import { UilBars, UilSearch, UilUser } from "@iconscout/vue-unicons";
 
 export default {
-  middleware: ["auth"],
   components: {
     UilBars,
     UilSearch,
     UilUser,
   },
+  middleware: ["auth"],
   data() {
     return {
       dark_mode: false,

@@ -43,8 +43,8 @@
           <div class="interactive-area f-1">
             <div class="card shadow-init">
               <button
-                class="button b-primary b-block b-with-fexpay"
                 v-if="!isLogin"
+                class="button b-primary b-block b-with-fexpay"
               >
                 <img
                   src="~/assets/img/logo/fexpay-light.svg"
@@ -54,7 +54,7 @@
                 <span>FEXPAY HESABIN İLE ÖDE</span>
               </button>
 
-              <div class="logged-in" v-else>
+              <div v-else class="logged-in">
                 <div class="logged-avatar">
                   <img :src="getUserAvatar" height="45px" alt="" />
                 </div>
@@ -93,15 +93,15 @@
                     <h5 class="title merchant-subtitle">Kart Bilgileri</h5>
                     <div class="card-number-input">
                       <input
+                        ref="cardNumber"
+                        v-model="test"
                         class="input f-control"
                         type="text"
-                        @input="cardValidate()"
-                        ref="cardNumber"
                         placeholder="1234 1234 1234 1234"
                         required
-                        v-model="test"
+                        @input="cardValidate()"
                       />
-                      <div class="card-brand" v-if="cardInfo.card">
+                      <div v-if="cardInfo.card" class="card-brand">
                         <img
                           :src="cardBrandLogo"
                           height="15px"
@@ -112,16 +112,16 @@
                     </div>
                     <div class="card-details">
                       <input
-                        class="input f-control"
                         ref="cardExp"
+                        class="input f-control"
                         type="text"
                         required
                         placeholder="AA / YY"
                       />
 
                       <input
-                        class="input f-control"
                         ref="cardCvc"
+                        class="input f-control"
                         type="number"
                         required
                         placeholder="CVC"
@@ -129,8 +129,8 @@
                     </div>
                     <div class="card-owner-name">
                       <input
-                        class="input f-control"
                         ref="cardOwnerName"
+                        class="input f-control"
                         type="text"
                         required
                         placeholder="Kart Sahibinin Adı Soyadı"
@@ -160,6 +160,67 @@
     </div>
   </div>
 </template>
+
+
+<script>
+import {
+  UilShop,
+  UilCreditCard,
+  UilUniversity,
+  UilPaypal,
+  UilTagAlt,
+} from "@iconscout/vue-unicons";
+import Valid from "card-validator";
+import Payment from "payment";
+
+export default {
+  components: {
+    UilShop,
+    UilCreditCard,
+    UilUniversity,
+    UilPaypal,
+    UilTagAlt,
+  },
+  data() {
+    return {
+      test: null,
+    };
+  },
+  computed: {
+    cardInfo() {
+      return Valid.number(this.test);
+      // Valid.number(this.test)
+    },
+    cardBrandLogo() {
+      return require(`~/assets/img/cardbrandsall/${this.cardInfo.card.type.replace(
+        " ",
+        ""
+      )}.svg`);
+    },
+    isLogin() {
+      return this.$store.state.user.authenticated;
+    },
+    getUserAvatar() {
+      return this.getUser.info.defaultAvatar
+        ? `https://avatars.dicebear.com/api/initials/${this.getUser.info.fullname}.svg?background=%23274AD2`
+        : this.getUser.info.avatarUrl;
+    },
+    getUser() {
+      return this.$store.state.user.data;
+    },
+  },
+  mounted() {
+    Payment.formatCardNumber(this.$refs.cardNumber, 16);
+    Payment.formatCardExpiry(this.$refs.cardExp);
+    Payment.formatCardCVC(this.$refs.cardCvc);
+  },
+  methods: {
+    cardValidate() {
+      // console.log(this.cardInfo);
+    },
+  },
+};
+</script>
 
 <style lang="scss" scope>
 .b-with-fexpay {
@@ -452,63 +513,3 @@
   }
 }
 </style>
-
-<script>
-import {
-  UilShop,
-  UilCreditCard,
-  UilUniversity,
-  UilPaypal,
-  UilTagAlt,
-} from "@iconscout/vue-unicons";
-import Valid from "card-validator";
-import Payment from "payment";
-
-export default {
-  components: {
-    UilShop,
-    UilCreditCard,
-    UilUniversity,
-    UilPaypal,
-    UilTagAlt,
-  },
-  data() {
-    return {
-      test: null,
-    };
-  },
-  methods: {
-    cardValidate() {
-      // console.log(this.cardInfo);
-    },
-  },
-  computed: {
-    cardInfo() {
-      return Valid.number(this.test);
-      // Valid.number(this.test)
-    },
-    cardBrandLogo() {
-      return require(`~/assets/img/cardbrandsall/${this.cardInfo.card.type.replace(
-        " ",
-        ""
-      )}.svg`);
-    },
-    isLogin() {
-      return this.$store.state.user.authenticated;
-    },
-    getUserAvatar() {
-      return this.getUser.info.defaultAvatar
-        ? `https://avatars.dicebear.com/api/initials/${this.getUser.info.fullname}.svg?background=%23274AD2`
-        : this.getUser.info.avatarUrl;
-    },
-    getUser() {
-      return this.$store.state.user.data;
-    },
-  },
-  mounted() {
-    Payment.formatCardNumber(this.$refs.cardNumber, 16);
-    Payment.formatCardExpiry(this.$refs.cardExp);
-    Payment.formatCardCVC(this.$refs.cardCvc);
-  },
-};
-</script>

@@ -52,7 +52,6 @@
           class="f-control"
           placeholder="email"
           name=""
-          id=""
         />
 
         <textarea
@@ -71,9 +70,9 @@
         <div class="f-group">
           <label for="a">Text With Label</label>
           <input
+            id="a"
             type="text"
             class="f-control"
-            id="a"
             placeholder="text input"
           />
         </div>
@@ -111,7 +110,7 @@
         </div>
 
         <label class="f-checkbox" for="b">
-          <input type="checkbox" id="b" /> Checkbox with input
+          <input id="b" type="checkbox" /> Checkbox with input
         </label>
       </form>
     </div>

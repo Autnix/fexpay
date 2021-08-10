@@ -84,12 +84,12 @@
         <nuxt-link tag="a" to="/auth/login" href="#">Hemen Giriş Yap</nuxt-link>
       </small>
     </div>
-    <input type="checkbox" id="popup-checkbox" v-model="bottomPopupCheckbox" />
+    <input id="popup-checkbox" v-model="bottomPopupCheckbox"  type="checkbox"/>
     <div class="bottom-popup">
       <label class="popup-label"></label>
       <div class="popup-container">
         <div class="container-fix">
-          <div class="popup-alerts" v-if="error.status">
+          <div v-if="error.status" class="popup-alerts">
             <alert :text="error.text" :icon="true" />
           </div>
           <div class="popup-head">
@@ -105,9 +105,9 @@
           </div>
 
           <form
+            v-if="popupPage == 1"
             class="popup-form"
             @submit.prevent="register()"
-            v-if="popupPage == 1"
           >
             <div class="form-elements">
               <vue-phone-number-input
@@ -151,7 +151,7 @@
             </div>
           </form>
 
-          <form class="popup-form" @submit.prevent="confirmUser()" v-else>
+          <form v-else class="popup-form" @submit.prevent="confirmUser()">
             <p class="form-desc">
               <strong>{{ user.phoneFormatted }}</strong> numaralı telefonunuza
               bir doğrulama kodu gönderdik. Lütfen doğrulama kodunu aşağıda size
@@ -164,14 +164,14 @@
                 class="f-control"
                 placeholder="Doğrulama Kodunuz"
                 pattern="[0-9]"
-                @input="formatCode()"
                 :required="true"
+                @input="formatCode()"
               />
-              <small class="timer-info" v-if="phoneTimer != 0"
+              <small v-if="phoneTimer != 0" class="timer-info"
                 >Doğrulama kodunu tekrar göndermek için {{ phoneTimer }} saniye
                 bekleyin.
               </small>
-              <small class="timer-info" v-else>
+              <small v-else class="timer-info">
                 <a
                   href="javascript:;"
                   style="color: var(--primary-color)"
@@ -202,11 +202,17 @@ import {
   UilUser,
   UilKeySkeletonAlt,
   UilEnvelope,
-  UilMobileAndroid,
   UilCommentAltShield,
 } from "@iconscout/vue-unicons";
 
 export default {
+  components: {
+    UilUser,
+    UilKeySkeletonAlt,
+    UilEnvelope,
+    UilCommentAltShield,
+  },
+  layout: "auth",
   data() {
     return {
       bottomPopupCheckbox: false,
@@ -228,22 +234,14 @@ export default {
       loading: 0,
     };
   },
-  components: {
-    UilUser,
-    UilKeySkeletonAlt,
-    UilEnvelope,
-    UilMobileAndroid,
-    UilCommentAltShield,
-  },
-  layout: "auth",
   methods: {
     registerEvent() {
       this.bottomPopupCheckbox = true;
     },
     timerStart() {
       this.phoneTimer = 30;
-      let interval = setInterval(() => {
-        if (this.phoneTimer - 1 == 0) {
+      const interval = setInterval(() => {
+        if (this.phoneTimer - 1 === 0) {
           clearInterval(interval);
         }
         this.phoneTimer = this.phoneTimer - 1;
@@ -251,7 +249,7 @@ export default {
     },
     async resendCode() {
       this.error.status = false;
-      let data = await this.$axios
+      const data = await this.$axios
         .post("/auth/resend-verification-code", this.user)
         .then((res) => {
           return res.data;
@@ -280,7 +278,7 @@ export default {
         });
       }
 
-      let data = await this.$axios
+      await this.$axios
         .post("/auth/register", this.user)
         .then((res) => {
           this.popupPage = 2;
@@ -299,7 +297,7 @@ export default {
     async confirmUser() {
       this.loading = 1;
       this.error.status = false;
-      let data = await this.$axios
+      const data = await this.$axios
         .post("/auth/verify-phone", {
           phone: this.user.phoneFormatted,
           code: this.verificationCode,
@@ -318,7 +316,7 @@ export default {
 
       if (!data) return;
 
-      let login = await this.$axios.post("/auth/login", this.user);
+      await this.$axios.post("/auth/login", this.user);
 
       await this.$store.dispatch("user/login", data.user);
       this.$router.push("/dashboard");

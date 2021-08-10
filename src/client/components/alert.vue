@@ -1,13 +1,13 @@
 <template>
   <div class="alert" :class="`alert-${mode}`">
     <uil-exclamation-triangle
+      v-if="icon"
       size="18px"
       :style="{
         fill: `var(--b-color-${mode})`,
         'margin-right': '10px',
         'margin-bottom': '1px',
       }"
-      v-if="icon"
     />
     <span> {{ text }}</span>
   </div>
@@ -21,7 +21,7 @@ export default {
     UilExclamationTriangle,
   },
   props: {
-    text: String,
+    text: { type: String, default: null},
     icon: { type: Boolean, default: true },
     mode: {
       type: String,

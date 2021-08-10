@@ -1,13 +1,15 @@
-const head = require('./config/head'),
-  css = require('./config/css'),
-  env = require('./config/env'),
-  plugins = require('./config/plugins'),
-  buildModules = require('./config/buildModules'),
-  modules = require('./config/modules'),
-  build = require('./config/build'),
-  serverMiddleware = require('./config/serverMiddleware')
+// const head = require('./config/head');
 
-module.exports = {
+import head from './config/head';
+import css from './config/css';
+import env from './config/env';
+import plugins from './config/plugins';
+import buildModules from './config/buildModules';
+import modules from './config/modules';
+import build from './config/build';
+import serverMiddleware from './config/serverMiddleware';
+
+export default {
   srcDir: 'src/client/',
   ssr: true,
   head,

@@ -5,18 +5,7 @@
 </template>
 
 <script>
-import {
-  UilUserSquare,
-  UilKeySkeletonAlt,
-  UilEnvelope,
-} from "@iconscout/vue-unicons";
-
 export default {
-  components: {
-    UilUserSquare,
-    UilKeySkeletonAlt,
-    UilEnvelope,
-  },
   computed: {
     lightMode() {
       return !this.$store.state.dark_mode

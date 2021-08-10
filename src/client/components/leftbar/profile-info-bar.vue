@@ -29,7 +29,7 @@
           </a>
         </li>
         <li>
-          <a @click.prevent="toDark()" href="#">
+          <a href="#" @click.prevent="toDark()">
             <uil-cog size="20px" />
           </a>
         </li>
@@ -89,11 +89,6 @@ export default {
     UilPlusCircle,
     UilArrowCircleDown,
   },
-  methods: {
-    async toggleThemeMode() {
-      await this.$store.dispatch("toggleTheme");
-    },
-  },
   computed: {
     getUserAvatar() {
       return this.getUser.info.defaultAvatar
@@ -102,6 +97,11 @@ export default {
     },
     getUser() {
       return this.$store.state.user.data;
+    },
+  },
+  methods: {
+    async toggleThemeMode() {
+      await this.$store.dispatch("toggleTheme");
     },
   },
 };
