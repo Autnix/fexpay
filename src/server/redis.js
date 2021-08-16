@@ -1,15 +1,5 @@
-let REDIS_OPTIONS = {};
-
-if (process.env.DEPLOY === 'HEROKU') {
-  REDIS_OPTIONS = {
-    tls: {
-      rejectUnauthorized: true
-    }
-  };
-}
-
 const Redis = require('ioredis')
-const cluster = new Redis(process.env.REDIS_URI || 'redis://127.0.0.1:6379', REDIS_OPTIONS)
+const cluster = new Redis(process.env.REDIS_URL || 'redis://127.0.0.1:6379')
 
 cluster.on('connect', () => {
   console.warn('📡 Redis connected!');
