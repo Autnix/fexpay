@@ -30,7 +30,7 @@
     "ioredis": "^4.27.7",
     "mongoose": "^5.13.7",
     "nuxt": "^2.15.8",
-    "payment": "^2.4.4",
+    "payment": "^2.4.6",
     "qs": "^6.10.1",
     "uuid": "^8.3.2",
     "vue-phone-number-input": "^1.1.10"
