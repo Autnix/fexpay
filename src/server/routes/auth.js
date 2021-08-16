@@ -4,8 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 const HmacSHA256 = require('crypto-js/hmac-sha256');
 const User = require('../models/User');
 const Redis = require('../redis');
-
 const gsm = require("../netgsm");
+const Helper = require('../helper');
 
 Router.get('/', (req, res) => {
   res.status(200).json({
@@ -120,7 +120,8 @@ Router.post("/register", async (req, res) => {
     email,
     auth: {
       password: pass,
-      salt
+      salt,
+      verificationCode: Helper.randomInt(100000, 999999)
     },
   })
 
