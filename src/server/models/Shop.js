@@ -16,7 +16,8 @@ module.exports =
         public: { type: String, required: true },
         callback: { type: String, default: null }
       },
-      createAt: { type: Date, default: new Date() }
+      createAt: { type: Date, default: Date.now },
+      removed: { type: Boolean, default: false }
     }),
     'shops'
   )

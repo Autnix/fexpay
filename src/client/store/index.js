@@ -17,8 +17,10 @@ export const actions = {
     const { session } = await $axios.get("/server-init")
       .then(res => res.data)
 
-    if (session?.user)
-      dispatch('user/login', session.user)
+    if (session?.user) {
+      await dispatch('user/login', session.user)
+      await dispatch('shops/setShops', session.shops)
+    }
 
   },
   toggleTheme({ commit }) {

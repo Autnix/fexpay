@@ -47,7 +47,7 @@ module.exports =
           brand: Number
         }
       ],
-      createAt: { type: Date, default: new Date() }
+      createAt: { type: Date, default: Date.now }
     }),
     'users'
   )
