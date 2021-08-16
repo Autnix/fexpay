@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "ioredis": "^4.27.7",
-    "mongoose": "^5.13.3",
+    "mongoose": "^5.13.7",
     "nuxt": "^2.15.7",
     "payment": "^2.4.4",
     "qs": "^6.10.1",
