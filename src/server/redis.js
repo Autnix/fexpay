@@ -1,8 +1,10 @@
-const REDIS_OPTIONS = {};
+let REDIS_OPTIONS = {};
 
 if (process.env.DEPLOY === 'HEROKU') {
-  REDIS_OPTIONS.tls = {
-    rejectUnauthorized: true
+  REDIS_OPTIONS = {
+    tls: {
+      rejectUnauthorized: true
+    }
   };
 }
 
