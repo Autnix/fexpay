@@ -1,6 +1,17 @@
 <template>
   <div class="page">
     <div class="card mb-inline">
+      <form
+        action="http://localhost:3000/cdn/upload"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="files" multiple />
+        <button>SUBMIT</button>
+      </form>
+    </div>
+
+    <div class="card mb-inline">
       <input
         class="clock"
         type="text"
@@ -47,12 +58,7 @@
           required
         />
 
-        <input
-          type="email"
-          class="f-control"
-          placeholder="email"
-          name=""
-        />
+        <input type="email" class="f-control" placeholder="email" name="" />
 
         <textarea
           cols="30"
@@ -119,11 +125,30 @@
 </template>
 
 <script>
-import { UilEnvelope } from "@iconscout/vue-unicons";
+import { UilEnvelope } from '@iconscout/vue-unicons'
 
 export default {
   components: {
     UilEnvelope,
   },
-};
+  data() {
+    return {
+      file: null,
+    }
+  },
+  methods: {
+    // async changeFile(e) {
+    //   const data = await this.$axios.post(
+    //     'http://localhost:3000/cdn/upload',
+    //     e.target.file,
+    //     {
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //       },
+    //     }
+    //   )
+    //   console.log(data)
+    // },
+  },
+}
 </script>
