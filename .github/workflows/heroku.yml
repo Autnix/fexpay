@@ -25,4 +25,5 @@ jobs:
           HD_MONGO_URI: ${{secrets.HEROKU_ENV_MONGO_URI}}
           HD_NETGSM_USERNAME: ${{secrets.HEROKU_NETGSM_USERNAME}}
           HD_NETGSM_PASSWORD: ${{secrets.HEROKU_NETGSM_PASSWORD}}
+          HD_SECRET_TOKEN: ${{secrets.HEROKU_SECRET_TOKEN}}
           HD_DEPLOY: HEROKU
