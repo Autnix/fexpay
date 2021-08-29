@@ -53,17 +53,24 @@
 
 
 <script>
-import {
-  UilArrowDown,
-  UilArrowUp,
-} from "@iconscout/vue-unicons";
+import { UilArrowDown, UilArrowUp } from '@iconscout/vue-unicons'
 
 export default {
   components: {
     UilArrowDown,
     UilArrowUp,
   },
-};
+  async fetch() {
+    const data = await this.$secureAxios.get('/shop/get-all', {
+      headers: {
+        Authorization: `Bearer ${this.$store.state.user.data?.token}`,
+      },
+    })
+
+    console.warn(data)
+  },
+  fetchOnServer: false,
+}
 </script>
 
 <style scoped>
