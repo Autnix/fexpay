@@ -146,6 +146,10 @@
 }
 
 @media screen and (max-width: 920px) {
+
+  .error-handle .icon {
+    display: none;
+  }
   
   .left-bar {
     position: fixed !important;

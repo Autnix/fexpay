@@ -2,10 +2,13 @@ const express = require('express');
 const helper = require('../helper');
 const Router = express.Router();
 const IsLogin = require('../middlewares/IsLogin');
+const SECUREJWT = require('../middlewares/secureJwt');
 const Shop = require('../models/Shop');
 
 
 Router.use(IsLogin);
+
+SECUREJWT.use(Router);
 
 Router.get('/', (req, res) => {
   res.status(200).json({
@@ -35,8 +38,6 @@ Router.post('/create', async (req, res) => {
   });
 
   await shop.save();
-
-  req.session.shops.push(shop);
 
   res.status(200).json({
     status: 200,
@@ -72,8 +73,6 @@ Router.post('/remove', async (req, res) => {
     _id,
     owner
   }, { removed: true })
-
-  req.session.shops = req.session.shops.filter(e => e._id !== _id)
 
   res.status(200).json({
     status: 200,

@@ -19,7 +19,6 @@ export const actions = {
 
     if (session?.user) {
       await dispatch('user/login', session.user)
-      await dispatch('shops/setShops', session.shops)
     }
 
   },
