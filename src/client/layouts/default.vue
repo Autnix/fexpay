@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <uiErrorHandle />
     <input id="bar-id" type="checkbox" class="form-control" />
     <div class="main" :class="{ light: lightMode }">
       <label for="bar-id" class="backdrop"></label>
@@ -58,7 +59,7 @@
 </template>
 
 <script>
-import { UilBars, UilSearch, UilUser } from "@iconscout/vue-unicons";
+import { UilBars, UilSearch, UilUser } from '@iconscout/vue-unicons'
 
 export default {
   components: {
@@ -66,17 +67,17 @@ export default {
     UilSearch,
     UilUser,
   },
-  middleware: ["auth"],
+  middleware: ['auth'],
   data() {
     return {
       dark_mode: false,
-    };
+    }
   },
   computed: {
     lightMode() {
-      return !this.$store.state.dark_mode;
+      return !this.$store.state.dark_mode
     },
   },
   async mounted() {},
-};
+}
 </script>

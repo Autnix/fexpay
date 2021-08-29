@@ -2,11 +2,11 @@ const express = require('express')
 const Router = express.Router()
 const { v4: uuidv4 } = require('uuid')
 const HmacSHA256 = require('crypto-js/hmac-sha256')
+const jwt = require('jsonwebtoken');
 const User = require('../models/User')
 const Redis = require('../redis')
 const gsm = require('../netgsm')
 const Helper = require('../helper')
-const Shop = require('../models/Shop')
 
 Router.get('/', (req, res) => {
   res.status(200).json({
@@ -37,12 +37,23 @@ Router.post('/login', async (req, res) => {
     })
   }
 
-  req.session.user = user
-  req.session.shops = await Shop.find({ removed: false, owner: user._id });
+  const secureUser = user.toObject();
+
+  delete secureUser.auth;
+
+  // * Generate Token
+
+  const token = jwt.sign(secureUser, process.env.SECRET_TOKEN, {
+    expiresIn: 30 * 60 // ? 30 minutes
+  });
+
+  secureUser.token = token
+
+  req.session.user = secureUser
 
   res.json({
     status: 200,
-    user
+    user: secureUser
   })
 })
 
