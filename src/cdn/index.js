@@ -1,40 +1,34 @@
-const fs = require('fs');
 const express = require('express');
-const multer = require('multer');
 const app = express();
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    const dir = './src/client/static/uploads';
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-    callback(null, dir);
-  },
-  filename: (req, file, callback) => {
-    const ext = file.originalname.split('.')[1];
-    if (["htm", "html"].includes(ext)) return;
-    callback(null, file.originalname);
-  }
-});
-
-const upload = multer({ storage }).array('files', 12);
+const { UPLOAD_PUBLIC, UPLOAD_SHOP } = require('./utils/uploads');
 
 app.post('/upload', (req, res, next) => {
-
-  upload(req, res, (err) => {
+  UPLOAD_PUBLIC(req, res, (err) => {
     if (err) {
       console.error(err);
       return res.send("Something went wrong!");
     }
     res.redirect('/uploads/' + req.files[0]?.filename)
   })
-
 });
 
-app.get("/", (req, res) => {
-  res.write("hello cdn");
-  res.end();
+app.post('/upload/shop', (req, res) => {
+  UPLOAD_SHOP(req, res, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(402).json({
+        status: 402,
+        message: "Something went wrong!"
+      })
+    }
+
+    res.status(200).json({
+      status: 200,
+      message: "file uploaded",
+      path: req.files[0]?.filename
+    })
+  })
 })
 
 module.exports = app

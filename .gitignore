@@ -90,3 +90,7 @@ sw.*
 *.swp
 
 .vscodeignore
+
+# Custom
+
+src/client/static/uploads

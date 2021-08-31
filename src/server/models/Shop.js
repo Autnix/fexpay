@@ -6,9 +6,13 @@ module.exports =
     'shops',
     new Schema({
       owner: Types.ObjectId,
+      status: { type: Number, default: 1 },
       info: {
         name: String,
         website: String
+      },
+      images: {
+        logo: { type: String, default: null },
       },
       token: {
         status: { type: Boolean, default: false },
@@ -16,8 +20,7 @@ module.exports =
         public: { type: String, required: true },
         callback: { type: String, default: null }
       },
-      createAt: { type: Date, default: Date.now },
-      removed: { type: Boolean, default: false }
+      createAt: { type: Date, default: Date.now }
     }),
     'shops'
   )

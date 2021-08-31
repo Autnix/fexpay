@@ -56,6 +56,15 @@ label.f-checkbox {
 
 .f-group {
   display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  small {
+    font-size: 12px;
+    opacity: .7;
+    a {
+      color: var(--b-color-primary)
+    }
+  }
   // margin-right: -6px;
   // margin-left: -6px;
   // .f-element {

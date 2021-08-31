@@ -46,11 +46,11 @@
             </div>
             <div class="bar-icon">
               <label for="bar-id">
-                <uil-bars size="25px" />
+                <uil-credit-card-search size="25px" />
               </label>
             </div>
           </div>
-          <Nuxt />
+          <Nuxt keep-alive :keep-alive-props="{ max: 10 }" />
         </div>
       </div>
       <uiRightbar />
@@ -59,11 +59,11 @@
 </template>
 
 <script>
-import { UilBars, UilSearch, UilUser } from '@iconscout/vue-unicons'
+import { UilSearch, UilUser, UilCreditCardSearch } from '@iconscout/vue-unicons'
 
 export default {
   components: {
-    UilBars,
+    UilCreditCardSearch,
     UilSearch,
     UilUser,
   },

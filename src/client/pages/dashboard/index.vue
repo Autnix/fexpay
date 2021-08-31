@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-full">
     <div class="card"></div>
 
     <div style="margin: 3rem 0"></div>

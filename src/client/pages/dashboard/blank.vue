@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page-full">
     <div class="card mb-inline">
       <form
         action="http://localhost:3000/cdn/upload"

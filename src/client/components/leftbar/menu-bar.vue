@@ -1,33 +1,24 @@
 <template>
   <div class="menu-bar">
     <ul class="menu">
-      <li class="active">
+      <nuxt-link
+        tag="li"
+        to="/dashboard"
+        :class="{ active: routeName == 'dashboard' }"
+      >
         <a href="#">
           <uil-tachometer-fast-alt size="20px" class="icon" /> Ana Sayfa
         </a>
-      </li>
+      </nuxt-link>
+      <nuxt-link
+        tag="li"
+        to="/dashboard/shop"
+        :class="{ active: routeArray == 'shop' }"
+      >
+        <a href="#"> <uil-shop size="20px" class="icon" /> Mağazalarım </a>
+      </nuxt-link>
       <li>
         <a href="#"> <uil-bill size="20px" class="icon" /> Tahsilatlar </a>
-      </li>
-      <li>
-        <a href="#">
-          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <uil-credit-card size="20px" class="icon" /> Kartlarım ve Hesaplarım
-        </a>
       </li>
       <li>
         <a href="#">
@@ -43,15 +34,25 @@ import {
   UilTachometerFastAlt,
   UilBill,
   UilCreditCard,
-} from "@iconscout/vue-unicons";
+  UilShop,
+} from '@iconscout/vue-unicons'
 
 export default {
   components: {
     UilTachometerFastAlt,
     UilBill,
     UilCreditCard,
+    UilShop,
   },
-};
+  computed: {
+    routeName() {
+      return this.$route.name
+    },
+    routeArray() {
+      return this.$route.name?.split('-')[1]
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -63,7 +64,7 @@ export default {
     display: flex;
     flex-direction: column;
     li {
-      padding: 10px 15px;
+      // padding: 10px 15px;
       transition: 200ms all;
       cursor: pointer;
       &:hover {
@@ -91,6 +92,7 @@ export default {
         font-weight: 400;
         opacity: 0.8;
         color: var(--text-color);
+        margin: 10px 15px;
         .icon {
           margin: 0 15px 2px 0;
         }

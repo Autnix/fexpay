@@ -1,5 +1,6 @@
 <template>
   <div class="main auth" :class="{ light: lightMode }">
+    <uiErrorHandle />
     <Nuxt />
   </div>
 </template>
@@ -9,9 +10,9 @@ export default {
   computed: {
     lightMode() {
       return !this.$store.state.dark_mode
-    }
-  }
-};
+    },
+  },
+}
 </script>
 
 <style lang="scss">
