@@ -26,4 +26,5 @@ jobs:
           HD_NETGSM_USERNAME: ${{secrets.HEROKU_NETGSM_USERNAME}}
           HD_NETGSM_PASSWORD: ${{secrets.HEROKU_NETGSM_PASSWORD}}
           HD_SECRET_TOKEN: ${{secrets.HEROKU_SECRET_TOKEN}}
+          HD_CDN_PATH: ${{secrets.HEROKU_CDN_PATH}}
           HD_DEPLOY: HEROKU
