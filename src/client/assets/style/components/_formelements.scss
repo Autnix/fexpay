@@ -85,6 +85,13 @@ label.f-checkbox {
     }
   }
 
+  &.collapse-inline {
+    .group-icon {
+      width: inherit;
+      padding: 0 10px;
+    }
+  }
+
   .f-control {
     padding-left: 35px;
   }

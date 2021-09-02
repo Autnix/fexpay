@@ -6,7 +6,7 @@ module.exports =
     'products',
     new Schema({
       owner: Types.ObjectId,
-      project: Types.ObjectId,
+      shop: Types.ObjectId,
       status: { type: Number, default: 1 },
       code: { type: String, required: true },
       info: {

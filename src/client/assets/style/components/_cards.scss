@@ -3,6 +3,18 @@
   background-color: rgba(var(--card-color-rgb), 0.2);
   border-radius: 5px;
   padding: 10px;
+  .card-title {
+    display: flex;
+    height: 35px;
+    align-items: center;
+    border-bottom: 1px solid rgba(var(--dark-rgb), 0.2);
+    h4 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: .7px;
+    }
+  }
 }
 
 .mb-inline {

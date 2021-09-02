@@ -1,9 +1,9 @@
 const express = require('express');
 const { Types } = require('mongoose');
-const helper = require('../helper');
 const Router = express.Router();
 const IsLogin = require('../middlewares/IsLogin');
 const SECUREJWT = require('../middlewares/secureJwt');
+const Product = require('../models/Product');
 const Shop = require('../models/Shop');
 
 
@@ -13,8 +13,8 @@ SECUREJWT.use(Router);
 
 Router.get('/', (req, res) => {
   res.status(200).json({
-    PATH: '/shop',
-    ROUTE_NAME: 'shop-index',
+    PATH: '/product',
+    ROUTE_NAME: 'product-index',
     status: 200
   })
 })
@@ -22,40 +22,59 @@ Router.get('/', (req, res) => {
 Router.post('/create', async (req, res) => {
 
   const {
-    name,
-    website,
-    logo
+    code,
+    title,
+    description,
+    image,
+    priceCC,
+    shop
   } = req.body;
 
+  const owner = req.session.user._id;
+
+
   // * Required Check
-  if (!name || !website) {
+  if (!title || !description || !image || !priceCC || !code || !shop) {
     return res.status(400).json({
       status: 400,
       error: "Lütfen tüm gerekli alanları doldurduğunuzdan emin olun!"
     })
   }
 
-  const owner = req.session.user._id;
+  if (!Types.ObjectId.isValid(shop)) {
+    return res.status(401).json({
+      status: 401,
+      error: 'Geçersiz parametre (shop)'
+    })
+  }
 
-  const token = helper.createToken();
+  const foundedShop = await Shop.find({ _id: shop, owner, status: 1 });
 
-  const shop = new Shop({
+  if (!foundedShop)
+    return res.status(404).json({
+      status: 404,
+      error: "Mağaza bulunamadı!"
+    })
+
+  const product = new Product({
     owner,
+    shop: foundedShop._id,
+    code,
     info: {
-      name,
-      website,
+      title,
+      description,
+      image
     },
-    images: {
-      logo
-    },
-    token
+    billing: {
+      priceCC
+    }
   });
 
-  await shop.save();
+  await product.save();
 
   res.status(200).json({
     status: 200,
-    shop
+    product
   })
 
 
@@ -85,9 +104,9 @@ Router.post('/get', async (req, res) => {
 
   // let shop = await Shop.find({ status: 1, owner, _id: id });
 
-  const shop = await Shop.findById({ status: 1, owner, _id: id });
+  const product = await Product.findById({ status: 1, owner, _id: id });
 
-  if (!shop)
+  if (!product)
     return res.status(401).json({
       status: 401,
       error: 'Yetkisiz istek veya mağaza bulunamadı!'
@@ -95,7 +114,7 @@ Router.post('/get', async (req, res) => {
 
   res.status(200).json({
     status: 200,
-    shop
+    product
   })
 
 });
@@ -104,11 +123,11 @@ Router.get('/get-all', async (req, res) => {
 
   const owner = req.session.user._id;
 
-  const shops = await Shop.find({ status: 1, owner });
+  const products = await Product.find({ status: 1, owner });
 
   res.status(200).json({
     status: 200,
-    shops
+    products
   })
 
 
@@ -122,7 +141,7 @@ Router.post('/remove', async (req, res) => {
 
   const owner = req.session.user._id;
 
-  await Shop.findOneAndUpdate({
+  await Product.findOneAndUpdate({
     _id,
     owner
   }, { status: 0 })

@@ -31,5 +31,20 @@ module.exports = {
       if (!["jpg", "jpeg", "gif", "png"].includes(ext)) return;
       callback(null, uuidv4() + '.' + ext);
     }
+  }),
+
+  STORAGE_PRODUCT: multer.diskStorage({
+    destination: (req, file, callback) => {
+      const dir = './src/client/static/uploads/product-images';
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      callback(null, dir);
+    },
+    filename: (req, file, callback) => {
+      const ext = file.originalname.split('.')[1];
+      if (!["jpg", "jpeg", "gif", "png"].includes(ext)) return;
+      callback(null, uuidv4() + '.' + ext);
+    }
   })
 };

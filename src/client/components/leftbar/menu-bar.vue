@@ -17,6 +17,15 @@
       >
         <a href="#"> <uil-shop size="20px" class="icon" /> Mağazalarım </a>
       </nuxt-link>
+      <nuxt-link
+        tag="li"
+        to="/dashboard/product"
+        :class="{ active: routeArray == 'product' }"
+      >
+        <a href="#">
+          <uil-pricetag-alt size="20px" class="icon" /> Ürünlerim
+        </a>
+      </nuxt-link>
       <li>
         <a href="#"> <uil-bill size="20px" class="icon" /> Tahsilatlar </a>
       </li>
@@ -35,6 +44,7 @@ import {
   UilBill,
   UilCreditCard,
   UilShop,
+  UilPricetagAlt,
 } from '@iconscout/vue-unicons'
 
 export default {
@@ -43,6 +53,7 @@ export default {
     UilBill,
     UilCreditCard,
     UilShop,
+    UilPricetagAlt,
   },
   computed: {
     routeName() {
