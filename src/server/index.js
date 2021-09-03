@@ -6,6 +6,7 @@ const session = require('express-session')
 const RedisStore = require('connect-redis')(session)
 const Redis = require('./redis')
 const Route = require('./route')
+const LOG = require('./logs');
 
 app.use(
   session({
@@ -25,6 +26,15 @@ app.get('/', (req, res) => {
     ROUTE_NAME: 'index',
     status: 200
   })
+})
+
+app.get('/log-test', async (req, res) => {
+
+  const log = await LOG.push(301, { product_id: 31, data: { a: 'b' } }, req.session?.user?._id);
+
+  res.status(200).json({ log })
+
+
 })
 
 

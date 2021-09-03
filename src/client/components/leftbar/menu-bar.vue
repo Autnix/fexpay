@@ -27,7 +27,9 @@
         </a>
       </nuxt-link>
       <li>
-        <a href="#"> <uil-bill size="20px" class="icon" /> Tahsilatlar </a>
+        <a href="#">
+          <uil-bill size="20px" class="icon" /> Hesap Hareketlerim
+        </a>
       </li>
       <li>
         <a href="#">

@@ -18,6 +18,7 @@ module.exports =
         verificationCode: { type: Number, required: true }
       },
       accountType: { type: Number, default: 0 },
+      accountRank: { type: Number, default: 0 },
       betaUser: { type: Number, default: 0 },
       validateUser: { type: Number, default: 0 },
       balance: { type: Number, default: 0 },

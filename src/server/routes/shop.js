@@ -2,9 +2,10 @@ const express = require('express');
 const { Types } = require('mongoose');
 const helper = require('../helper');
 const Router = express.Router();
-const IsLogin = require('../middlewares/IsLogin');
+const IsLogin = require('../middlewares/isLogin');
 const SECUREJWT = require('../middlewares/secureJwt');
 const Shop = require('../models/Shop');
+const LOGS = require('../logs');
 
 
 Router.use(IsLogin);
@@ -51,7 +52,20 @@ Router.post('/create', async (req, res) => {
     token
   });
 
-  await shop.save();
+  const systemLog = await LOGS.push(201, { shop_id: shop._id, data: shop }, owner);
+
+  const createdShop = await shop.save().catch(e => false);
+
+  if (createdShop !== shop) {
+    res.status(501).json({
+      status: 501,
+      error: "Beklenmedik bir hata meydana geldi. Lütfen daha sonra tekrar deneyin!"
+    })
+    await LOGS.status('decline', systemLog);
+    return false;
+  }
+
+  await LOGS.status('success', systemLog);
 
   res.status(200).json({
     status: 200,
@@ -122,10 +136,23 @@ Router.post('/remove', async (req, res) => {
 
   const owner = req.session.user._id;
 
-  await Shop.findOneAndUpdate({
+  const systemLog = await LOGS.push(202, { shop_id: _id }, owner);
+
+  const removedShop = await Shop.findOneAndUpdate({
     _id,
     owner
-  }, { status: 0 })
+  }, { status: 0 }).catch(e => false)
+
+  if (!removedShop) {
+    res.status(501).json({
+      status: 501,
+      error: "Beklenmedik bir hata meydana geldi. Lütfen daha sonra tekrar deneyin!"
+    })
+    await LOGS.status('decline', systemLog);
+    return false;
+  }
+
+  await LOGS.status('success', systemLog);
 
   res.status(200).json({
     status: 200,
