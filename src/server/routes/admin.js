@@ -1,11 +1,11 @@
 const express = require('express');
 const Router = express.Router()
-const IS_LOGIN = require('../middlewares/isLogin');
+const IsLogin = require('../middlewares/isLogin');
 const IS_ADMIN = require('../middlewares/isAdmin');
 // const SECURE_JWT = require('../middlewares/secureJwt');
 const ROUTE_LOGS = require('./adminRoutes/logs');
 
-Router.use(IS_LOGIN);
+Router.use(IsLogin);
 Router.use(IS_ADMIN);
 
 // SECURE_JWT.use(Router);
