@@ -44,7 +44,7 @@ Router.post('/login', async (req, res) => {
   // * Generate Token
 
   const token = jwt.sign(secureUser, process.env.SECRET_TOKEN, {
-    expiresIn: 30 * 60 // ? 30 minutes
+    expiresIn: 5 * 60 * 60 // ? 5 Hours
   });
 
   secureUser.token = token

@@ -93,4 +93,5 @@ sw.*
 
 # Custom
 
-src/client/static/uploads
+src/client/static/uploads/product-images/*
+src/client/static/uploads/shop-images/*
