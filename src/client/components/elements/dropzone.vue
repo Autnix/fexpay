@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       localOptions: {
-        url: 'http://httpbin.org/anything',
+        url: 'https://httpbin.org/anything',
         // thumbnailHeight: 50,
         // thumbnailWidth: 50,
         thumbnailMethod: 'contain',
