@@ -1,6 +1,6 @@
 const express = require('express');
 const Router = express.Router()
-const IsLogin = require('../middlewares/isLogin');
+const IsLogin = require('../middlewares/IsLogin');
 const IS_ADMIN = require('../middlewares/isAdmin');
 // const SECURE_JWT = require('../middlewares/secureJwt');
 const ROUTE_LOGS = require('./adminRoutes/logs');
