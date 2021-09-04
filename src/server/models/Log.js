@@ -5,7 +5,7 @@ module.exports =
   model(
     'logs',
     new Schema({
-      owner: Types.ObjectId,
+      owner: { type: Types.ObjectId, ref: 'users' },
       title: String,
       command: String,
       status: { type: Number, default: 0 },

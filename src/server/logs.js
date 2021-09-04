@@ -1,4 +1,4 @@
-const Log = require('./models/Logs');
+const Log = require('./models/Log');
 const LIBRARY = require('./log/library');
 
 module.exports = {

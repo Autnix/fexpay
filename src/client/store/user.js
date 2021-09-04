@@ -28,3 +28,9 @@ export const actions = {
   }
 
 }
+
+export const getters = {
+
+  isAdmin: state => state.data?.accountRank >= 10
+
+}

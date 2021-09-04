@@ -4,10 +4,14 @@
 
 .card {
   overflow: hidden;
+  &.card-responsive {
+    overflow-x: auto;
+  }
   table {
     width: 100%;
     caption-side: bottom;
     border-collapse: collapse;
+    
     thead {
       background-color: rgba(var(--primary-color-rgb), .3);
       tr {
@@ -27,6 +31,10 @@
         td {
           &.w-zero {
             width: 0;
+          }
+          & > span {
+            display: inline-block;
+            width: max-content;
           }
           padding: 10px 0;
           font-size: 14px;

@@ -9,7 +9,9 @@ module.exports = {
 
     for (const file of files) {
 
-      filename = file.split(".")[0];
+      filename = file.split(".")
+      if (filename.length <= 1) continue;
+      filename = filename[0];
 
       md = require('./routes/' + filename);
 

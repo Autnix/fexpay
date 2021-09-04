@@ -1,20 +1,28 @@
 <template>
   <tr>
     <td class="w-zero">
-      <img
-        :src="`/uploads/product-images/${product.info.image}`"
-        width="45px"
-        alt=""
-      />
+      <span>
+        <img
+          :src="`/uploads/product-images/${product.info.image}`"
+          width="45px"
+          alt=""
+        />
+      </span>
     </td>
-    <td>{{ product.info.title }}</td>
-    <td>DataFEX</td>
     <td>
-      <a :href="`fexpay.net/p/${product.code}`" target="_blank"
-        ><strong>{{ `fexpay.net/p/${product.code}` }}</strong></a
+      <span>{{ product.info.title }}</span>
+    </td>
+    <td><span>%shop_name%</span></td>
+    <td>
+      <span
+        ><a :href="`fexpay.net/p/${product.code}`" target="_blank"
+          ><strong>{{ `fexpay.net/p/${product.code}` }}</strong></a
+        ></span
       >
     </td>
-    <td>{{ product.billing.priceCC.toFixed(2) }} ₺</td>
+    <td>
+      <span>{{ product.billing.priceCC.toFixed(2) }} ₺</span>
+    </td>
     <td></td>
   </tr>
 </template>

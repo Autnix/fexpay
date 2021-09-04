@@ -11,7 +11,7 @@
       </span>
     </div>
     <div class="products">
-      <div class="card p-0">
+      <div class="card card-responsive p-0">
         <table>
           <thead>
             <tr>
@@ -37,9 +37,9 @@
               </td>
             </tr>
             <productListElement
-              :product="product"
               v-for="product in products"
               :key="product._id"
+              :product="product"
             />
             <!-- <tr v-else-if="!$fetchState.error">
               <td class="w-zero">

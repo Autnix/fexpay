@@ -2,6 +2,15 @@
   <div class="menu-bar">
     <ul class="menu">
       <nuxt-link
+        v-if="isAdmin"
+        tag="li"
+        to="/dashboard/admin"
+        :class="{ active: routeArray == 'admin' }"
+      >
+        <a href="#"> <uil-bag size="20px" class="icon" /> Yönetim Paneli </a>
+      </nuxt-link>
+
+      <nuxt-link
         tag="li"
         to="/dashboard"
         :class="{ active: routeName == 'dashboard' }"
@@ -47,7 +56,9 @@ import {
   UilCreditCard,
   UilShop,
   UilPricetagAlt,
+  UilBag,
 } from '@iconscout/vue-unicons'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -56,8 +67,10 @@ export default {
     UilCreditCard,
     UilShop,
     UilPricetagAlt,
+    UilBag,
   },
   computed: {
+    ...mapGetters('user', ['isAdmin']),
     routeName() {
       return this.$route.name
     },
