@@ -29,8 +29,6 @@ module.exports = {
   }),
 
   status: (st, _log) => new Promise((resolve, reject) => {
-
-
     Log.findByIdAndUpdate(_log._id, {
       status: (st === 'success') ? 1 : -1
     }, (err, log) => {
@@ -38,10 +36,21 @@ module.exports = {
         console.error(err);
         reject(Error("Database Error!"));
       }
-
       resolve(log);
     })
+  }),
 
+  setData: (data, _log) => new Promise((resolve, reject) => {
+
+    Log.findByIdAndUpdate(_log._id, {
+      logData: data
+    }, (err, log) => {
+      if (err) {
+        console.error(err);
+        reject(Error("Database Error!"));
+      }
+      resolve(log);
+    })
 
   })
 

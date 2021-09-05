@@ -185,4 +185,55 @@ Router.post('/remove', async (req, res) => {
 
 })
 
+Router.post('/update', async (req, res) => {
+
+  const {
+    product
+  } = req.body;
+
+  const owner = req.session.user._id;
+
+  const systemLog = await LOGS.push(303, { product_id: product._id }, owner);
+
+  // * Required Check
+  if (!product.info.title || !product.info.description || !product.info.image || !product.billing.priceCC || !product.code) {
+    return res.status(400).json({
+      status: 400,
+      error: "Lütfen tüm gerekli alanları doldurduğunuzdan emin olun!"
+    })
+  }
+
+  delete product.shopId
+  delete product.code
+  delete product.showing
+  delete product.owner
+  const _id = product._id;
+  delete product._id;
+
+  const updatedProduct = await Product.findOneAndUpdate({ _id, owner, status: 1 }, { ...product })
+    .catch(e => false);
+
+  if (!updatedProduct) {
+    res.status(501).json({
+      status: 501,
+      error: "Beklenmedik bir hata meydana geldi. Lütfen daha sonra tekrar deneyin!"
+    });
+    await LOGS.status('decline', systemLog);
+    return false;
+  }
+
+  await LOGS.setData({
+    beforeData: updatedProduct.toObject(),
+    afterData: product
+  }, systemLog);
+
+  await LOGS.status('success', systemLog);
+
+  res.status(200).json({
+    status: 200,
+    product
+  })
+
+})
+
 module.exports = Router

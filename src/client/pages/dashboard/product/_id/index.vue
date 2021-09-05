@@ -13,10 +13,45 @@
       <div v-if="$fetchState.pending"></div>
       <div v-else-if="!$fetchState.error" class="edit-area card-wrap">
         <ProductForm :product="product" @inputProduct="inputProduct" />
+        <button
+          class="button b-primary b-bold b-block"
+          @click.prevent="updateProduct()"
+        >
+          ÜRÜNÜ GÜNCELLE
+        </button>
       </div>
-      <div class="card card-wrap">
+      <div v-if="$fetchState.pending"></div>
+      <div v-else-if="!$fetchState.error" class="card card-wrap">
         <div class="card-title">
           <h4>ÜRÜN ÖNİZLEME</h4>
+        </div>
+        <div class="card-body showroom">
+          <div class="product-card">
+            <div class="shw-image">
+              <div class="image-area">
+                <img
+                  :src="`/uploads/product-images/${product.info.image}`"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="shw-title">
+              <h4>{{ product.info.title }}</h4>
+            </div>
+            <div class="shw-price">
+              <h5>{{ product.billing.priceCC.toFixed(2) }} ₺</h5>
+            </div>
+            <div class="desc-title">
+              <h6>Açıklama</h6>
+            </div>
+            <div class="shw-description">
+              <div class="desc-area">
+                <p>
+                  {{ product.info.description }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -62,6 +97,32 @@ export default {
     inputProduct(product) {
       this.product = product
     },
+    async updateProduct() {
+      const productUpdate = await this.$axios
+        .post(
+          '/product/update',
+          {
+            product: this.product,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.user.data?.token}`,
+            },
+          }
+        )
+        .then((res) => res.data)
+        .catch((e) => false)
+
+      if (productUpdate.status !== 200) {
+        this.$store.dispatch(
+          'error/up',
+          productUpdate?.error || 'Bilinmeyen bir hata meydana geldi!'
+        )
+        return false
+      }
+
+      this.$router.push({ name: 'dashboard-product' })
+    },
   },
 }
 </script>
@@ -94,6 +155,77 @@ export default {
         }
         &:last-of-type {
           margin-right: 0;
+        }
+      }
+    }
+    .card-body.showroom {
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      .product-card {
+        width: 100%;
+        background-color: rgba(var(--light-rgb), 0.4);
+        border: 1px solid rgba(#eee, 0.4);
+        padding: 30px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 30px;
+        margin-bottom: auto;
+        margin-top: 30px;
+        .shw-image {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          .image-area {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(white, 0.2);
+            img {
+              width: 100%;
+              border-radius: 5px;
+            }
+          }
+        }
+        .shw-title {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+          h4 {
+            font-size: 24px;
+          }
+        }
+        .shw-price {
+          display: flex;
+          justify-content: center;
+          h5 {
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
+        .desc-title {
+          margin-top: 20px;
+          h6 {
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+        .shw-description {
+          display: flex;
+          margin-top: 5px;
+          background-color: rgba(var(--light-rgb), 0.8);
+          border: 1px solid rgba(var(--dark-rgb), 0.3);
+          padding: 10px;
+          border-radius: 5px;
+          p {
+            font-family: 'Inconsolata', monospace;
+            font-size: 12px;
+          }
         }
       }
     }

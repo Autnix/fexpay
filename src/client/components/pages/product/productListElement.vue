@@ -23,12 +23,20 @@
     <td>
       <span>{{ product.billing.priceCC.toFixed(2) }} ₺</span>
     </td>
-    <td></td>
+    <td class="edit">
+      <nuxt-link tag="a" :to="'/dashboard/product/' + product._id" href="#">
+        <uil-edit size="20" />
+      </nuxt-link>
+    </td>
   </tr>
 </template>
 
 <script>
+import { UilEdit } from '@iconscout/vue-unicons'
 export default {
+  components: {
+    UilEdit,
+  },
   props: {
     // eslint-disable-next-line vue/require-default-prop
     product: {
@@ -40,4 +48,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.edit {
+  a {
+    opacity: 0.8;
+    transition: 200ms opacity;
+    &:hover {
+      opacity: 1;
+    }
+    svg {
+      fill: var(--primary-color);
+    }
+  }
+}
 </style>
