@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "express-jwt": "^6.1.0",
     "express-session": "^1.17.2",
-    "ioredis": "^4.27.8",
+    "ioredis": "^4.27.9",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
     "mongoose": "^6.0.3",
