@@ -18,7 +18,7 @@
     "@iconscout/vue-unicons": "^0.0.3",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "bootstrap": "^5.1.0",
     "card-validator": "^8.1.1",
     "connect-redis": "^6.0.0",
