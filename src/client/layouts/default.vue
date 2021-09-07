@@ -1,12 +1,12 @@
 <template>
   <div class="index">
-    <uiErrorHandle />
     <input id="bar-id" type="checkbox" class="form-control" />
     <div class="main" :class="{ light: lightMode }">
       <label for="bar-id" class="backdrop"></label>
       <input id="user-id" type="checkbox" class="form-control" />
       <uiLeftbar />
       <div class="content">
+        <uiErrorHandle />
         <div class="page">
           <div class="topbar">
             <div class="left">

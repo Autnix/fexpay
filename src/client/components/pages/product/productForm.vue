@@ -140,9 +140,15 @@ export default {
             this.$store.state.user.data.interests.creditCard
       ).toFixed(2)
     },
+    priceStandart() {
+      return this.localProduct.billing.priceCC.toFixed(2)
+    },
   },
   created() {
     this.localProduct = { ...this.product }
+    this.localProduct.billing.priceCC = Number(
+      this.localProduct.billing.priceCC
+    ).toFixed(2)
   },
   methods: {
     inputProduct() {

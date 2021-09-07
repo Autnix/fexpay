@@ -39,7 +39,7 @@
               <h4>{{ product.info.title }}</h4>
             </div>
             <div class="shw-price">
-              <h5>{{ product.billing.priceCC.toFixed(2) }} ₺</h5>
+              <h5>{{ Number(product.billing.priceCC).toFixed(2) }} ₺</h5>
             </div>
             <div class="desc-title">
               <h6>Açıklama</h6>

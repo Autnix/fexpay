@@ -23,5 +23,6 @@ export default {
   serverMiddleware,
   server: {
     host: "0.0.0.0"
-  }
+  },
+  loading: false
 }

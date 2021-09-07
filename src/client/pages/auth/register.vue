@@ -84,7 +84,7 @@
         <nuxt-link tag="a" to="/auth/login" href="#">Hemen Giriş Yap</nuxt-link>
       </small>
     </div>
-    <input id="popup-checkbox" v-model="bottomPopupCheckbox"  type="checkbox"/>
+    <input id="popup-checkbox" v-model="bottomPopupCheckbox" type="checkbox" />
     <div class="bottom-popup">
       <label class="popup-label"></label>
       <div class="popup-container">
@@ -203,7 +203,7 @@ import {
   UilKeySkeletonAlt,
   UilEnvelope,
   UilCommentAltShield,
-} from "@iconscout/vue-unicons";
+} from '@iconscout/vue-unicons'
 
 export default {
   components: {
@@ -212,7 +212,7 @@ export default {
     UilEnvelope,
     UilCommentAltShield,
   },
-  layout: "auth",
+  layout: 'auth',
   data() {
     return {
       bottomPopupCheckbox: false,
@@ -232,107 +232,109 @@ export default {
       phoneTimer: 30,
       verificationCode: null,
       loading: 0,
-    };
+    }
   },
   methods: {
     registerEvent() {
-      this.bottomPopupCheckbox = true;
+      this.bottomPopupCheckbox = true
     },
     timerStart() {
-      this.phoneTimer = 30;
+      this.phoneTimer = 30
       const interval = setInterval(() => {
         if (this.phoneTimer - 1 === 0) {
-          clearInterval(interval);
+          clearInterval(interval)
         }
-        this.phoneTimer = this.phoneTimer - 1;
-      }, 1000);
+        this.phoneTimer = this.phoneTimer - 1
+      }, 1000)
     },
     async resendCode() {
-      this.error.status = false;
+      this.error.status = false
       const data = await this.$axios
-        .post("/auth/resend-verification-code", this.user)
+        .post('/auth/resend-verification-code', this.user)
         .then((res) => {
-          return res.data;
+          return res.data
         })
         .catch((err) => {
           this.error = {
             status: true,
             text: err.response.data.message,
-          };
-          return null;
-        });
+          }
+          return null
+        })
 
       if (data) {
-        this.timerStart();
+        this.timerStart()
       }
     },
     async register() {
-      this.loading = 1;
-      this.error.status = false;
+      this.loading = 1
+      this.error.status = false
 
       if (!this.user.phoneValid) {
-        this.loading = 0;
+        this.loading = 0
         return (this.error = {
           status: true,
-          text: "Lütfen telefon numaranızı doğru girdiğinizden emin olun!",
-        });
+          text: 'Lütfen telefon numaranızı doğru girdiğinizden emin olun!',
+        })
       }
 
       await this.$axios
-        .post("/auth/register", this.user)
+        .post('/auth/register', this.user)
         .then((res) => {
-          this.popupPage = 2;
-          this.timerStart();
-          return res.data;
+          this.popupPage = 2
+          this.timerStart()
+          return res.data
         })
         .catch((err) => {
           this.error = {
             status: true,
             text: err.response.data.message,
-          };
-          return null;
-        });
-      this.loading = 0;
+          }
+          return null
+        })
+      this.loading = 0
     },
     async confirmUser() {
-      this.loading = 1;
-      this.error.status = false;
+      this.loading = 1
+      this.error.status = false
       const data = await this.$axios
-        .post("/auth/verify-phone", {
+        .post('/auth/verify-phone', {
           phone: this.user.phoneFormatted,
           code: this.verificationCode,
         })
         .then((res) => {
-          return res.data;
+          return res.data
         })
         .catch((err) => {
           this.error = {
             status: true,
             text: err.response.data.message,
-          };
-          this.loading = 0;
-          return null;
-        });
+          }
+          this.loading = 0
+          return null
+        })
 
-      if (!data) return;
+      if (!data) return
 
-      await this.$axios.post("/auth/login", this.user);
+      const LoggedData = await this.$axios
+        .post('/auth/login', this.user)
+        .then((res) => res.data)
 
-      await this.$store.dispatch("user/login", data.user);
-      this.$router.push("/dashboard");
-      this.loading = 0;
+      await this.$store.dispatch('user/login', LoggedData.user)
+      this.$router.push('/dashboard')
+      this.loading = 0
     },
     onPhoneUpdate(payload) {
-      this.user.phoneValid = payload.isValid;
-      this.user.phoneFormatted = payload.formattedNumber;
+      this.user.phoneValid = payload.isValid
+      this.user.phoneFormatted = payload.formattedNumber
     },
     formatCode() {
-      this.verificationCode = this.verificationCode.replace(/[^\d]/g, "");
+      this.verificationCode = this.verificationCode.replace(/[^\d]/g, '')
       if (this.verificationCode.length >= 6)
-        this.verificationCode = this.verificationCode.slice(0, 6);
+        this.verificationCode = this.verificationCode.slice(0, 6)
     },
   },
-};
+}
 </script>
 
 <style lang="scss">

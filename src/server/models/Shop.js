@@ -5,7 +5,7 @@ module.exports =
   model(
     'shops',
     new Schema({
-      owner: Types.ObjectId,
+      owner: { type: Types.ObjectId, ref: 'users' },
       status: { type: Number, default: 1 },
       info: {
         name: String,
