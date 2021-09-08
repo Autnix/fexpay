@@ -1,6 +1,6 @@
-module.exports = ({ store, redirect }) => {
+module.exports = ({ store, redirect, route }) => {
 
   if (!store.state.user.authenticated)
-    return redirect('/auth/login')
+    return redirect(`/auth/login?redirect=${encodeURIComponent(route.path || '')}`)
 
 }

@@ -22,6 +22,7 @@ module.exports =
       betaUser: { type: Number, default: 0 },
       validateUser: { type: Number, default: 0 },
       balance: { type: Number, default: 0 },
+      declineMethods: { type: Array, default: () => [] },
       interests: {
         creditCard: { type: Number, default: 0.07 },
         fexpayAccount: { type: Number, defauilt: 0 }

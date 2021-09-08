@@ -38,10 +38,9 @@ export default {
     UilEdit,
   },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     product: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
 }

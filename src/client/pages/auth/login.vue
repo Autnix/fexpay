@@ -81,14 +81,14 @@
 </template>
 
 <script>
-import { UilKeySkeletonAlt, UilEnvelope } from "@iconscout/vue-unicons";
+import { UilKeySkeletonAlt, UilEnvelope } from '@iconscout/vue-unicons'
 
 export default {
   components: {
     UilKeySkeletonAlt,
     UilEnvelope,
   },
-  layout: "auth",
+  layout: 'auth',
   data() {
     return {
       user: {
@@ -100,30 +100,34 @@ export default {
         text: null,
       },
       loading: false,
-    };
+    }
+  },
+  mounted() {
+    console.log(this.$route.query)
   },
   methods: {
     async login() {
-      this.loading = 1;
-      this.error.status = false;
+      this.loading = 1
+      this.error.status = false
 
       const data = await this.$axios
-        .post("/auth/login", this.user)
+        .post('/auth/login', this.user)
         .then((res) => res.data)
         .catch((err) => {
           this.error = {
             status: true,
             text: err.response.data.message,
-          };
-          this.loading = 0;
-          return null;
-        });
+          }
+          this.loading = 0
+          return null
+        })
 
-      if (!data) return;
+      if (!data) return
+      const redirectUri = this.$route.query?.redirect || '/dashboard'
 
-      await this.$store.dispatch("user/login", data.user);
-      this.$router.push("/dashboard");
+      await this.$store.dispatch('user/login', data.user)
+      this.$router.push(redirectUri)
     },
   },
-};
+}
 </script>

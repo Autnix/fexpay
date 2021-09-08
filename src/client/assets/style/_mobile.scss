@@ -50,13 +50,19 @@
     }
   }
 
-  .merchant-container {
-    flex-direction: column;
-    & > * {
-      margin: 0 !important;
-      &:first-child {
-        margin-bottom: 20px !important;
+  .merchant-content {
+    padding: 0 !important;
+    .merchant-container {
+      flex-direction: column;
+      margin: 20px 0;
+      height: max-content;
+      & > * {
+        margin: 0 !important;
+        &:first-child {
+          margin-bottom: 20px !important;
+        }
       }
+      
     }
   }
 

@@ -40,10 +40,9 @@ export default {
     UilBill,
   },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     shop: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
 }

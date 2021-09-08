@@ -16,7 +16,6 @@ module.exports =
       },
       billing: {
         priceCC: { type: Number, default: 1.00 },
-        declineMethods: { type: Array, default: () => [] }
       },
       customFields: { type: Array, default: () => [] },
       showing: {
