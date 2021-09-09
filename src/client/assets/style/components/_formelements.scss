@@ -36,7 +36,7 @@ label.f-checkbox {
       height: 18px;
       width: 18px;
       min-width: 18px;
-      border: 1px solid var(--b-color-primary);
+      border: 1px solid var(--b-color-primary) !important;
       &::after {
         content: '';
         position: absolute;

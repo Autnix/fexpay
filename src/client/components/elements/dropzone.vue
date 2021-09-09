@@ -25,10 +25,9 @@ export default {
     Dropzone,
   },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     options: {
       type: Object,
-      require: true,
+      required: true,
     },
   },
   data() {

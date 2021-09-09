@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  middleware: ['alreadyLogin'],
   computed: {
     lightMode() {
       return !this.$store.state.dark_mode
