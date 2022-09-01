@@ -41,7 +41,7 @@
     "qs": "^6.11.0",
     "uuid": "^8.3.2",
     "vue-loading-skeleton": "^1.1.9",
-    "vue-phone-number-input": "^1.1.10"
+    "vue-phone-number-input": "^1.1.12"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.9",
