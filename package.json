@@ -58,7 +58,7 @@
     "fibers": "^5.0.0",
     "jest": "^29.0.1",
     "sass": "^1.54.5",
-    "sass-loader": "10",
+    "sass-loader": "13",
     "vue-jest": "^3.0.4"
   }
 }
