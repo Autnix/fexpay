@@ -39,7 +39,7 @@
     "nuxt-dropzone": "^1.0.4",
     "payment": "^2.4.6",
     "qs": "^6.11.0",
-    "uuid": "^8.3.2",
+    "uuid": "^9.0.0",
     "vue-loading-skeleton": "^1.1.9",
     "vue-phone-number-input": "^1.1.12"
   },
